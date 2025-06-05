@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA Dodgers active players</title>
+    <style>
+        * {
+            text-align: center;
+            align-items: center;
+            margin: auto;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body {
+            width: 1200px;
+        }
+
+        h2.position {
+            background-color: #0a3882;
+            color: white;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .cardRow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .playerCard {
+            width: 280px;
+            color: #0a3882;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 2.5px solid #0a3882;
+            transition: background-color 0.5s;
+            transition: 0.5s;
+            margin-top: 15px;
+        }
+
+        .playerCard:last-child {
+            margin-right: 0;
+        }
+
+        .playerCard:first-child {
+            margin-left: 0;
+        }
+
+        .playerCard:hover {
+            scale: 1.1;
+            background-color: #0a3882;
+            color: white;
+        }
+
+        .footer {
+            font-size: 10px;
+            color: #0a3882;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://www.mlb.com/dodgers" target="_blank">
+        <img src="pics/logo.png" width="200" style="margin-top: 20px;">
+    </a>
+
+    <h2 class="position">Pitchers</h2>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/anthony-banda-607455" target="_blank">
+                <img src="pics/AnthonyBanda.jpg" width="200">
+            </a>
+            <h3>Anthony Banda</h3>
+            <p>#43 | B/T: L/L</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/ben-casparius-676508" target="_blank">
+                <img src="pics/BenCasparius.jpg" width="200">
+            </a>
+            <h3>Ben Casparius</h3>
+            <p>#78 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/jack-dreyer-676263" target="_blank">
+                <img src="pics/JackDreyer.jpg" width="200">
+            </a>
+            <h3>Jack Dreyer</h3>
+            <p>#86 | B/T: R/L</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/tyler-glasnow-607192" target="_blank">
+                <img src="pics/TylerGlasnow.jpg" width="200">
+            </a>
+            <h3>Tyler Glasnow</h3>
+            <p>#31 | B/T: L/R</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/tony-gonsolin-664062" target="_blank">
+                <img src="pics/TonyGonsolin.jpg" width="200">
+            </a>
+            <h3>Tony Gonsolin</h3>
+            <p>#26 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/brusdar-graterol-660813" target="_blank">
+                <img src="pics/BrusdarGraterol.jpg" width="200">
+            </a>
+            <h3>Brusdar Graterol</h3>
+            <p>#48 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/michael-grove-675627" target="_blank">
+                <img src="pics/MichaelGrove.jpg" width="200">
+            </a>
+            <h3>Michael Grove</h3>
+            <p>#29 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/edgardo-henriquez-683618" target="_blank">
+                <img src="pics/EdgardoHenriquez.jpg" width="200">
+            </a>
+            <h3>Edgardo Henriquez</h3>
+            <p>#60 | B/T: R/R</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/kyle-hurt-669165" target="_blank">
+                <img src="pics/KyleHurt.jpg" width="200">
+            </a>
+            <h3>Kyle Hurt</h3>
+            <p>#63 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/clayton-kershaw-477132" target="_blank">
+                <img src="pics/ClaytonKershaw.jpg" width="200">
+            </a>
+            <h3>Clayton Kershaw</h3>
+            <p>#22 | B/T: L/L</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/landon-knack-689017" target="_blank">
+                <img src="pics/LandonKnack.jpg" width="200">
+            </a>
+            <h3>Landon Knack</h3>
+            <p>#96 | B/T: L/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/michael-kopech-656629" target="_blank">
+                <img src="pics/MichaelKopech.jpg" width="200">
+            </a>
+            <h3>Michael Kopech</h3>
+            <p>#45 | B/T: R/R</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/dustin-may-669160" target="_blank">
+                <img src="pics/DustinMay.jpg" width="200">
+            </a>
+            <h3>Dustin May</h3>
+            <p>#85 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/bobby-miller-676272" target="_blank">
+                <img src="pics/BobbyMiller.jpg" width="200">
+            </a>
+            <h3>Bobby Miller</h3>
+            <p>#28 | B/T: L/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/evan-phillips-623465" target="_blank">
+                <img src="pics/EvanPhillips.jpg" width="200">
+            </a>
+            <h3>Evan Phillips</h3>
+            <p>#59 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/tanner-scott-656945" target="_blank">
+                <img src="pics/TannerScott.jpg" width="200">
+            </a>
+            <h3>Tanner Scott</h3>
+            <p>#66 | B/T: R/L</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/emmet-sheehan-686218" target="_blank">
+                <img src="pics/EmmetSheehan.jpg" width="200">
+            </a>
+            <h3>Emmet Sheehan</h3>
+            <p>#80 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/blake-snell-605483" target="_blank">
+                <img src="pics/BlakeSnell.jpg" width="200">
+            </a>
+            <h3>Blake Snell</h3>
+            <p>#7 | B/T: L/L</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/blake-treinen-595014" target="_blank">
+                <img src="pics/BlakeTreinen.jpg" width="200">
+            </a>
+            <h3>Blake Treinen</h3>
+            <p>#49 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/alex-vesia-681911" target="_blank">
+                <img src="pics/AlexVesia.jpg" width="200">
+            </a>
+            <h3>Alex Vesia</h3>
+            <p>#51 | B/T: L/L</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/justin-wrobleski-680736" target="_blank">
+                <img src="pics/JustinWrobleski.jpg" width="200">
+            </a>
+            <h3>Justin Wrobleski</h3>
+            <p>#70 | B/T: L/L</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/yoshinobu-yamamoto-808967" target="_blank">
+                <img src="pics/YoshinobuYamamoto.jpg" width="200">
+            </a>
+            <h3>Yoshinobu Yamamoto</h3>
+            <p>#18 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/kirby-yates-489446" target="_blank">
+                <img src="pics/KirbyYates.jpg" width="200">
+            </a>
+            <h3>Kirby Yates</h3>
+            <p>#38 | B/T: L/R</p>
+        </div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+    </div>
+
+    <h2 class="position">Two-Way Player</h2>
+
+    <div class="cardRow">
+
+        <div class="playerCard" style="margin-left: 0px; ">
+            <a href="https://www.mlb.com/player/shohei-ohtani-660271" target="_blank">
+                <img src="pics/ShoheiOhtani.jpg" width="200">
+            </a>
+            <h3>Shohei Ohtani</h3>
+            <p>#17 | B/T: L/R</p>
+        </div>
+    </div>
+
+    <h2 class="position">Catchers</h2>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/austin-barnes-605131" target="_blank">
+                <img src="pics/AustinBarnes.jpg" width="200">
+            </a>
+            <h3>Austin Barnes</h3>
+            <p>#15 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/hunter-feduccia-676439" target="_blank">
+                <img src="pics/HunterFeduccia.jpg" width="200">
+            </a>
+            <h3>Hunter Feduccia</h3>
+            <p>#67 | B/T: L/R</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/will-smith-669257" target="_blank">
+                <img src="pics/WillSmith.jpg" width="200">
+            </a>
+            <h3>Will Smith</h3>
+            <p>#16 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+    </div>
+
+    <h2 class="position">Infielders</h2>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/mookie-betts-605141" target="_blank">
+                <img src="pics/MookieBetts.jpg" width="200">
+            </a>
+            <h3>Mookie Betts</h3>
+            <p>#50 | B/T: R/R | SS</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/freddie-freeman-518692" target="_blank">
+                <img src="pics/FreddieFreeman.jpg" width="200">
+            </a>
+            <h3>Freddie Freeman</h3>
+            <p>#5 | B/T: L/R | 1B</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/enrique-hernandez-571771" target="_blank">
+                <img src="pics/EnriqueHernandez.jpg" width="200">
+            </a>
+            <h3>Enrique Hern&aacutendez</h3>
+            <p>#8 | B/T: R/R | 3B</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/hyeseong-kim-808975" target="_blank">
+                <img src="pics/HyeseongKim.jpg" width="200">
+            </a>
+            <h3>Hyeseong Kim</h3>
+            <p>#6 | B/T: L/R | 2B</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/max-muncy-571970" target="_blank">
+                <img src="pics/MaxMuncy.jpg" width="200">
+            </a>
+            <h3>Max Muncy</h3>
+            <p>#13 | B/T: L/R | 3B</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/miguel-rojas-500743" target="_blank">
+                <img src="pics/MiguelRojas.jpg" width="200">
+            </a>
+            <h3>Miguel Rojas</h3>
+            <p>#72 | B/T: R/R | SS</p>
+        </div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+    </div>
+
+    <h2 class="position">Outfielders</h2>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/michael-conforto-624424" target="_blank">
+                <img src="pics/MichaelConforto.jpg" width="200">
+            </a>
+            <h3>Michael Conforto</h3>
+            <p>#23 | B/T: L/R | LF</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/tommy-edman-669242" target="_blank">
+                <img src="pics/TommyEdman.jpg" width="200">
+            </a>
+            <h3>Tommy Edman</h3>
+            <p>#25 | B/T: S/R | CF</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/teoscar-hernandez-606192" target="_blank">
+                <img src="pics/TeoscarHernandez.jpg" width="200">
+            </a>
+            <h3>Teoscar Hern&aacutendez</h3>
+            <p>#37 | B/T: R/R | LF</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/james-outman-681546" target="_blank">
+                <img src="pics/JamesOutman.jpg" width="200">
+            </a>
+            <h3>James Outman</h3>
+            <p>#33 | B/T: L/R | CF</p>
+        </div>
+    </div>
+
+    <div class="cardRow">
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/andy-pages-681624" target="_blank">
+                <img src="pics/AndyPages.jpg" width="200">
+            </a>
+            <h3>Andy Pages</h3>
+            <p>#44 | B/T: R/R | CF</p>
+        </div>
+
+        <div class="playerCard">
+            <a href="https://www.mlb.com/player/chris-taylor-621035" target="_blank">
+                <img src="pics/ChrisTaylor.jpg" width="200">
+            </a>
+            <h3>Chris Taylor</h3>
+            <p>#3 | B/T: R/R</p>
+        </div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+
+        <div class="playerCard" style="border: none" onmouseover="this.style.backgroundColor='white'"></div>
+    </div>
+
+    <p class="footer">Made by Zhi-Xiang Chen</p>
+
+</body>
+
+</html>

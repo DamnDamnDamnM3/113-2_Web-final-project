@@ -1,0 +1,91 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}歡迎來到球員卡購物網站{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <div class="home-card">
+        <h1 class="home-title">歡迎來到 LA Dodgers 球員卡購物網站</h1>
+        <p class="home-desc">
+            這裡你可以瀏覽、收藏並購買你最喜愛的 LA Dodgers 球員卡！<br>
+            你可以在「球員卡」頁面瀏覽所有球員卡資訊，或在「購物」頁面管理你的購物車與訂單。
+        </p>
+        <div class="home-btns">
+            <a href="{% url 'shop:player_cards' %}" class="main-btn">前往球員卡網站</a>
+            <a href="{% url 'shop:product_list' %}" class="main-btn">前往購物網站</a>
+        </div>
+        <img src="{% static 'player_cards/logo.png' %}" width="180" style="margin-top: 30px;">
+    </div>
+</div>
+<style>
+    .main-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 32px rgba(10, 56, 130, 0.10);
+        padding: 48px 32px 40px 32px;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .home-title {
+        font-weight: bold;
+        font-size: 2em;
+        margin-bottom: 18px;
+        color: #0a3882;
+    }
+
+    .home-desc {
+        font-size: 1.2em;
+        margin: 30px 0;
+        color: #222;
+    }
+
+    .home-btns {
+        margin: 40px 0 0 0;
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .main-btn {
+        background: #0a3882;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 15px 30px;
+        font-size: 1.1em;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(10, 56, 130, 0.08);
+    }
+
+    .main-btn:hover {
+        background: #3e92cc;
+    }
+
+    @media (max-width: 700px) {
+        .main-container {
+            min-height: 60vh;
+            padding: 0 2px;
+        }
+
+        .home-card {
+            padding: 24px 8px 24px 8px;
+        }
+
+        .home-btns {
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+</style>
+{% endblock %}

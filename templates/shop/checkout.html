@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}結帳{% endblock %}
+{% block content %}
+<h1 class="mb-4">結帳</h1>
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <ul class="list-group list-group-flush mb-3">
+                {% for item in cart_items %}
+                <li class="list-group-item">
+                  {{ item.product.name }} x {{ item.quantity }} = {{ item.subtotal|floatformat:0 }}元
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="mb-1">小計：{{ cart_total|floatformat:0 }} 元</p>
+                    <p class="mb-1">運費：{{ shipping|floatformat:0 }} 元</p>
+                    <p class="mb-0">總計：{{ total|floatformat:0 }} 元</p>
+                </div>
+                <button type="submit" class="btn btn-primary">確認結帳</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 

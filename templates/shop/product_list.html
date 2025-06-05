@@ -1,0 +1,214 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load shop_extras %}
+
+{% block title %}購物網站{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <h1 class="main-title">購物網站</h1>
+    <div class="product-list">
+        {% for product in products %}
+        <div class="product-card" data-product-id="{{ product.id }}">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-img" style="cursor:pointer;">
+            {% else %}
+            <img src="https://via.placeholder.com/320x180?text=No+Image" alt="No Image" class="product-img"
+                style="cursor:pointer;">
+            {% endif %}
+            <h3>{{ product.name }}</h3>
+            <p>{% if product.description %}{{ product.description }}{% else %}&mdash;{% endif %}</p>
+            <div class="price">${{ product.price|floatformat:2 }}</div>
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'shop:add_product_to_cart' product.id %}" class="add-cart-form">
+                {% csrf_token %}
+                <div class="cart-row">
+                    <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input">
+                    <button type="submit" class="main-btn cart-btn">加入購物車</button>
+                </div>
+            </form>
+            {% else %}
+            <div class="login-link">
+                <a href="{% url 'login' %}?next={% url 'shop:product_list' %}" class="main-btn">登入後購買</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 28px;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    .product-card {
+        width: 100%;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 2px 12px rgba(10, 56, 130, 0.08);
+        padding: 24px 18px 18px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: box-shadow 0.2s;
+        box-sizing: border-box;
+    }
+
+    .product-card:hover {
+        box-shadow: 0 8px 32px rgba(10, 56, 130, 0.13);
+        border: 1.5px solid #3e92cc;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        background: #f4f4f4;
+        border-radius: 8px;
+        margin-bottom: 18px;
+        display: block;
+    }
+
+    .product-card h3 {
+        margin: 0 0 14px 0;
+        font-size: 1.18em;
+        font-weight: bold;
+        text-align: center;
+        min-height: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-card p {
+        min-height: 4.5em;
+        margin-bottom: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-height: 1.5em;
+        color: #222;
+        font-size: 1em;
+        width: 100%;
+        text-align: left;
+    }
+
+    .product-card .price {
+        font-size: 1.15em;
+        font-weight: bold;
+        color: #0a2463;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .add-cart-form {
+        width: 100%;
+    }
+
+    .cart-row {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        gap: 0;
+    }
+
+    .qty-input {
+        flex: 0 0 60px;
+        height: 44px;
+        border: 1.2px solid #bfc9d9;
+        border-radius: 6px 0 0 6px;
+        text-align: center;
+        margin: 0;
+        padding: 0 6px;
+        border-right: none;
+        box-sizing: border-box;
+        font-size: 1em;
+        line-height: 44px;
+        background: #fff;
+        outline: none;
+    }
+
+    .cart-btn {
+        flex: 1 1 0;
+        height: 44px;
+        border-radius: 0 6px 6px 0;
+        border: 1.2px solid #bfc9d9;
+        border-left: none;
+        background: #0a3882;
+        color: #fff;
+        font-size: 1em;
+        font-weight: 500;
+        padding: 0;
+        text-align: center;
+        box-sizing: border-box;
+        transition: background 0.2s;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-btn:hover {
+        background: #3e92cc;
+    }
+
+    .login-link {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-btn {
+        background: #0a3882;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 8px;
+        text-decoration: none;
+        transition: background 0.2s;
+        font-weight: 500;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(10, 56, 130, 0.08);
+    }
+
+    .main-btn:hover {
+        background: #3e92cc;
+        color: #fff;
+    }
+
+    @media (max-width: 1200px) {
+        .product-list {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 0 8px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .main-container {
+            max-width: 100vw;
+            width: 100vw;
+            padding: 12px 0 18px 0;
+        }
+
+        .product-list {
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 0 2px;
+        }
+    }
+</style>
+{% endblock %}

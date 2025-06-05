@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>相機租借網站</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .header {
+                background-color: #333;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                font-size: 24px;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: center;
+                background-color: #444;
+                padding: 10px 0;
+            }
+            
+            .navbar a {
+                color: white;
+                padding: 14px 20px;
+                text-decoration: none;
+                font-size: 18px;
+            }
+            
+            .navbar a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 20px;
+            }
+
+            .side {
+                flex: 20%;
+                background-color: #f1f1f1;
+                padding: 20px;
+            }
+
+            .main {
+                flex: 70%;
+                padding: 20px;
+            }
+
+            .camera-card {
+                background: white;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 15px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .camera-card img {
+                width: 40%;
+                height: auto;
+                border-radius: 5px;
+            }
+            
+            .camera-card h3 {
+                margin: 10px 0;
+            }
+            
+            .camera-card p {
+                font-size: 16px;
+                color: #666;
+            }
+            
+            .camera-card button {
+                background-color: #444;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+            
+            .camera-card button:hover {
+                background-color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">相機租借網站</div>
+        
+        <div class="navbar">
+            <a href="#">首頁</a>
+            <a href="#">相機租借</a>
+            <a href="#">價格</a>
+            <a href="#">聯絡我們</a>
+        </div>
+        
+        <div class="row">
+            <div class="side">
+                <h2>關於我們</h2>
+                <p>我們提供多種專業相機租借，滿足您的拍攝需求。</p>
+            </div>
+            
+            <div class="main">
+                <h2>熱門相機</h2>
+                <div class="camera-card">
+                    <img src="https://tw.canon/media/image/2020/07/04/862a1f43feed4fab85897aee45b6324c_R5_Front_BODY.png" alt="Camera 1">
+                    <h3>Canon EOS R5</h3>
+                    <p>全片幅無反相機，適合專業攝影</p>
+                    <button>租借</button>
+                </div>
+                <div class="camera-card">
+                    <img src="data:image/jpeg;base64,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" alt="Camera 2">
+                    <h3>Sony A7 IV</h3>
+                    <p>高解析度與快速對焦，適合拍攝影片</p>
+                    <button>租借</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
