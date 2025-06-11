@@ -10,9 +10,6 @@
         * {
             text-align: center;
             align-items: center;
-            margin: auto;
-            padding-top: 5px;
-            padding-bottom: 5px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
@@ -24,35 +21,29 @@
         h2.position {
             background-color: #0a3882;
             color: white;
-            margin-top: 25px;
-            margin-bottom: 10px;
         }
 
-        .cardRow {
+        .container {
+            max-width: 1280px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            margin: 0 auto;
         }
 
         .playerCard {
-            width: 280px;
+            width: 300px;
+            height: 400px;
+            margin-right: 20px;
+            margin-bottom: 20px;
             color: #0a3882;
             border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             box-sizing: border-box;
             border: 2.5px solid #0a3882;
             transition: background-color 0.5s;
             transition: 0.5s;
-            margin-top: 15px;
-        }
-
-        .playerCard:last-child {
-            margin-right: 0;
-        }
-
-        .playerCard:first-child {
-            margin-left: 0;
         }
 
         .playerCard:hover {
