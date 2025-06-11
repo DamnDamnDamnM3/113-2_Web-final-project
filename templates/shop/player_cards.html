@@ -7,11 +7,37 @@
 <h1 style="margin-top: 20px;">排球隊球員介紹</h1>
 <div class="cardRow">
     {% for card in cards %}
-    <div class="playerCard">
-        <img src="{{ card.image.url }}" width="200">
-        <h3>{{ card.name }}</h3>
-        <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-        <p>{{ card.description }}</p>
+    <div class="container">
+        <div class="playerCard">
+            <img src="{{ card.image.url }}" width="200">
+            <h3>{{ card.name }}</h3>
+            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+        </div>
+        <div class="playerCard">
+            <img src="{{ card.image.url }}" width="200">
+            <h3>{{ card.name }}</h3>
+            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+        </div>
+        <div class="playerCard">
+            <img src="{{ card.image.url }}" width="200">
+            <h3>{{ card.name }}</h3>
+            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+        </div>
+        <div class="playerCard">
+            <img src="{{ card.image.url }}" width="200">
+            <h3>{{ card.name }}</h3>
+            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+        </div>
+        <div class="playerCard">
+            <img src="{{ card.image.url }}" width="200">
+            <h3>{{ card.name }}</h3>
+            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+            <p>{{ card.description }}</p>
+        </div>
     </div>
     {% empty %}
     <p>目前沒有球員資料。</p>
