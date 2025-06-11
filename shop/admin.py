@@ -5,7 +5,6 @@ from .models import (
     PurchaseRecord,
     PurchaseItem,
     PlayerCard,
-    CardCategory,
 )
 
 
@@ -33,15 +32,8 @@ class PurchaseItemAdmin(admin.ModelAdmin):
     list_filter = ("purchase",)
 
 
-@admin.register(CardCategory)
-class CardCategoryAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name",)
-
-
 @admin.register(PlayerCard)
 class PlayerCardAdmin(admin.ModelAdmin):
-    list_display = ("name", "team", "position", "price", "rarity", "year", "is_active")
-    list_filter = ("team", "position", "rarity", "year", "is_active")
-    search_fields = ("name", "team", "description")
-    list_editable = ("price", "is_active")
+    list_display = ("name", "position", "number")
+    list_filter = ("position",)
+    search_fields = ("name", "description")

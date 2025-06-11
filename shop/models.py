@@ -40,15 +40,15 @@ class PurchaseItem(models.Model):
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"
 
+
 class PlayerCard(models.Model):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=50)
     image = models.ImageField(upload_to="player_cards/")
     description = models.TextField(max_length=1000)
-    is_active = models.BooleanField(default=True)
+    number = models.CharField(max_length=3, default="0")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    number = models.CharField(max_length=3, default="0")
 
     def __str__(self):
-        return f"{self.name} ({self.team})"
+        return f"{self.name} ({self.position})"

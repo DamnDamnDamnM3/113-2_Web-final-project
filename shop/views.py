@@ -11,7 +11,6 @@ from .models import (
     PurchaseRecord,
     PurchaseItem,
     PlayerCard,
-    CardCategory,
 )
 from django.urls import reverse
 
@@ -219,8 +218,8 @@ def home(request):
 
 
 def player_cards(request):
-    categories = CardCategory.objects.all()
-    return render(request, "shop/player_cards.html", {"categories": categories})
+    cards = PlayerCard.objects.all()
+    return render(request, "shop/player_cards.html", {"cards": cards})
 
 
 @login_required
