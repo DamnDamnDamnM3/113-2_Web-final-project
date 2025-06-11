@@ -169,36 +169,10 @@ def checkout(request):
             price=item.product.price,
         )
 
-    # 發送訂單確認郵件
-    subject = "訂單確認"
-    message = f"""
-    親愛的 {request.user.username}：
-
-    感謝您的購買！以下是您的訂單詳情：
-
-    訂單編號：{purchase.id}
-    訂單日期：{purchase.created_at}
-    總金額：${total_price}
-
-    購買項目：
-    {chr(10).join([f"- {item.product.name} x {item.quantity} = ${item.price * item.quantity}" for item in cart_items])}
-
-    如有任何問題，請隨時與我們聯繫。
-
-    祝您購物愉快！
-    """
-    send_mail(
-        subject,
-        message,
-        settings.DEFAULT_FROM_EMAIL,
-        [request.user.email],
-        fail_silently=False,
-    )
-
     # 清空購物車
     cart_items.delete()
 
-    messages.success(request, "購買成功！訂單確認郵件已發送。")
+    messages.success(request, "購買成功！")
     return redirect("shop:profile")
 
 
