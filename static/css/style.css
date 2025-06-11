@@ -1,6 +1,7 @@
 /* 自定義樣式 */
 body {
-    background-color: #f8f9fa;
+    width: 80%;
+    background-color: #f8f9fa;;
 }
 
 .card-img-top {
