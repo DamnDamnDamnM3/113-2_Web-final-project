@@ -1,0 +1,14 @@
+{% load static %}
+<div class="footer">
+    <div class="footer_content">
+        <p>&copy;SUNTORY SUNBIRDS</p>
+        <a href="{% url 'shop:home' %}"><img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo" style="height: 80px;"></a>
+        <div class="footerButton">
+            {% for s in social_links %}
+                <button class="footer_button" onclick="window.open('{{ s.url }}', '_blank')">
+                    <img src="{% static s.icon %}" alt="{{ s.name }}">
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>

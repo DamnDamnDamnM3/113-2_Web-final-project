@@ -269,3 +269,6 @@ def update_profile(request):
         return redirect("shop:profile")
 
     return redirect("shop:profile")
+
+
+
