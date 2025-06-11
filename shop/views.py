@@ -98,20 +98,18 @@ def add_card_to_cart(request, card_id):
 
 
 @login_required
-def add_product_to_cart(request, product_id):
+def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    quantity = int(request.POST.get("quantity", 1))
-
     cart_item, created = CartItem.objects.get_or_create(
-        user=request.user, product=product, defaults={"quantity": quantity}
+        user=request.user, product=product, defaults={"quantity": 1}
     )
 
     if not created:
-        cart_item.quantity += quantity
+        cart_item.quantity += 1
         cart_item.save()
 
-    messages.success(request, f"{product.name} 已加入購物車！")
-    return redirect("shop:product_list")
+    messages.success(request, f"已將 {product.name} 加入購物車！")
+    return redirect("cart")
 
 
 @login_required
@@ -151,29 +149,60 @@ def remove_product_from_cart(request, product_id):
 
 @login_required
 def checkout(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    if not cart_items.exists():
-        messages.error(request, "購物車是空的！")
-        return redirect("shop:cart")
+    if request.method == "POST":
+        cart_items = CartItem.objects.filter(user=request.user)
+        if not cart_items.exists():
+            return redirect("cart")
 
-    # 創建購買記錄
-    total_price = sum(item.product.price * item.quantity for item in cart_items)
-    purchase = PurchaseRecord.objects.create(user=request.user, total_price=total_price)
-
-    # 創建購買項目
-    for item in cart_items:
-        PurchaseItem.objects.create(
-            purchase=purchase,
-            product=item.product,
-            quantity=item.quantity,
-            price=item.product.price,
+        # 創建購買記錄
+        purchase_record = PurchaseRecord.objects.create(
+            user=request.user,
+            total_amount=sum(item.product.price * item.quantity for item in cart_items),
         )
 
-    # 清空購物車
-    cart_items.delete()
+        # 添加購買項目
+        for item in cart_items:
+            PurchaseItem.objects.create(
+                purchase_record=purchase_record,
+                product=item.product,
+                quantity=item.quantity,
+                price=item.product.price,
+            )
 
-    messages.success(request, "購買成功！")
-    return redirect("shop:profile")
+        # 發送確認郵件
+        try:
+            subject = "訂單確認通知"
+            message = f"""
+            親愛的 {request.user.username}：
+
+            感謝您的購買！您的訂單已經成功建立。
+
+            訂單編號：{purchase_record.id}
+            訂單時間：{purchase_record.created_at}
+            總金額：${purchase_record.total_amount}
+
+            訂購商品：
+            {chr(10).join([f'- {item.product.name} x {item.quantity} (${item.price})' for item in purchase_record.items.all()])}
+
+            如有任何問題，請隨時與我們聯繫。
+
+            祝您購物愉快！
+            """
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [request.user.email]
+
+            print(f"Attempting to send email to {recipient_list}")  # 調試信息
+            send_mail(subject, message, from_email, recipient_list)
+            print("Email sent successfully")  # 調試信息
+        except Exception as e:
+            print(f"Failed to send email: {str(e)}")  # 調試信息
+            # 即使郵件發送失敗，我們仍然繼續處理訂單
+
+        # 清空購物車
+        cart_items.delete()
+
+        return redirect("profile")
+    return redirect("cart")
 
 
 def product_detail(request, product_id):
