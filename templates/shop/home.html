@@ -1,25 +1,50 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}歡迎來到球員卡購物網站{% endblock %}
+{% block title %}歡迎來到三得利太陽鳥網站{% endblock %}
 
 {% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <div class="main-container">
     <div class="home-card">
-        <h1 class="home-title">歡迎來到 LA Dodgers 球員卡購物網站</h1>
-        <p class="home-desc">
-            這裡你可以瀏覽、收藏並購買你最喜愛的 LA Dodgers 球員卡！<br>
-            你可以在「球員卡」頁面瀏覽所有球員卡資訊，或在「購物」頁面管理你的購物車與訂單。
-        </p>
-        <div class="home-btns">
-            <a href="{% url 'shop:player_cards' %}" class="main-btn">前往球員卡網站</a>
-            <a href="{% url 'shop:product_list' %}" class="main-btn">前往購物網站</a>
+
+        <!-- 輪播區塊 -->
+        <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in "12345" %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{% static 'img/banner'|add:i|add:'.png' %}" class="d-block  banner-img" alt="Banner {{ i }}">
+                </div>
+                {% endfor %}
+            </div>
+            <!-- 左右控制箭頭 -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">上一張</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">下一張</span>
+            </button>
+            <!-- 下方指示點 -->
+            <div class="carousel-indicators">
+                {% for i in "12345" %}
+                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
         </div>
-        <img src="{% static 'player_cards/logo.png' %}" width="180" style="margin-top: 30px;">
+
+        <h1 class="home-title">歡迎來到 三得利太陽鳥</h1>
+
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
     .main-container {
+        width: 90%;
         min-height: 80vh;
         display: flex;
         align-items: center;
@@ -30,8 +55,8 @@
         background: #fff;
         border-radius: 18px;
         box-shadow: 0 4px 32px rgba(10, 56, 130, 0.10);
-        padding: 48px 32px 40px 32px;
-        max-width: 600px;
+        padding: 24px 32px 40px 32px;
+        width: 90%;
         text-align: center;
     }
 
@@ -39,52 +64,28 @@
         font-weight: bold;
         font-size: 2em;
         margin-bottom: 18px;
-        color: #0a3882;
+        color: #c2281a;
     }
 
-    .home-desc {
-        font-size: 1.2em;
-        margin: 30px 0;
-        color: #222;
+    .banner-img {
+        width: 100%;
+        max-width: 1000px;     /* 固定寬度*/
+        height: 600px;        /* 固定高度*/
+        object-fit: cover;    /* 自動裁切填滿*/
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
     }
 
-    .home-btns {
-        margin: 40px 0 0 0;
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-    }
-
-    .main-btn {
-        background: #0a3882;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 15px 30px;
-        font-size: 1.1em;
-        text-decoration: none;
-        font-weight: 500;
-        transition: background 0.2s;
-        box-shadow: 0 2px 8px rgba(10, 56, 130, 0.08);
-    }
-
-    .main-btn:hover {
-        background: #3e92cc;
-    }
-
-    @media (max-width: 90%) {
+    @media (max-width: 768px) {
         .main-container {
             min-height: 60vh;
             padding: 0 2px;
         }
 
         .home-card {
-            padding: 24px 8px 24px 8px;
-        }
-
-        .home-btns {
-            flex-direction: column;
-            gap: 16px;
+            width: 90%;
+            padding: 16px 8px 24px 8px;
         }
     }
 </style>

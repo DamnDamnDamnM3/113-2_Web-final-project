@@ -224,6 +224,9 @@ def player_cards(request):
     cards = PlayerCard.objects.all()
     return render(request, "shop/player_cards.html", {"cards": cards})
 
+def team(request):
+    return render(request, "shop/team.html")
+
 
 @login_required
 def cart(request):
