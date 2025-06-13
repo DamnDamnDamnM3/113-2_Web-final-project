@@ -109,7 +109,7 @@ def add_to_cart(request, product_id):
         cart_item.save()
 
     messages.success(request, f"已將 {product.name} 加入購物車！")
-    return redirect("cart")
+    return redirect("shop:cart")
 
 
 @login_required
@@ -224,6 +224,7 @@ def player_cards(request):
     cards = PlayerCard.objects.all()
     return render(request, "shop/player_cards.html", {"cards": cards})
 
+
 def team(request):
     return render(request, "shop/team.html")
 
@@ -272,6 +273,3 @@ def update_profile(request):
         return redirect("shop:profile")
 
     return redirect("shop:profile")
-
-
-
