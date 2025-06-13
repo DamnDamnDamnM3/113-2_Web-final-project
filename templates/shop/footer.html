@@ -1,14 +1,64 @@
 {% load static %}
 <div class="footer">
     <div class="footer_content">
-        <p>&copy;SUNTORY SUNBIRDS</p>
-        <a href="{% url 'shop:home' %}"><img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo" style="height: 80px;"></a>
+        <a href="{% url 'shop:home' %}"><img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo"
+                style="height: 80px;"></a>
         <div class="footerButton">
             {% for s in social_links %}
-                <button class="footer_button" onclick="window.open('{{ s.url }}', '_blank')">
-                    <img src="{% static s.icon %}" alt="{{ s.name }}">
-                </button>
+            <button class="footer_button" onclick="window.open('{{ s.url }}', '_blank')">
+                <img src="{% static s.icon %}" alt="{{ s.name }}">
+            </button>
             {% endfor %}
         </div>
+        <p>&copy;SUNTORY SUNBIRDS</p>
     </div>
 </div>
+
+<style>
+    .footer {
+        width: 100%;
+        font-size: 10px;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 100px;
+        background-color: #c2281a;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .footer_content {
+        width: 100%;
+        margin: auto;
+        padding-top: 30px;
+        box-sizing: border-box;
+    }
+
+    .footerButton {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer_button {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        margin: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer_button img {
+        object-fit: contain;
+        width: 30px;
+    }
+
+    .footer_button:hover {
+        background-color: transparent;
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+    }
+</style>

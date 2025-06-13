@@ -16,12 +16,19 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
-        h1{
+        h1 {
             color: #0a3882;
             margin: 15px 0;
         }
@@ -32,6 +39,7 @@
         }
 
         .container {
+            flex: 1;
             max-width: 1280px;
             display: flex;
             flex-wrap: wrap;
@@ -87,62 +95,26 @@
         .nav-menu a:hover {
             color: #f1d64e;
         }
-        .menu{
+
+        .menu {
             width: 90%;
             margin: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .menu_item{
+
+        .menu_item {
             width: 20%;
             text-align: center;
             font-size: larger;
             justify-content: center;
-            align-items: center; 
-            display: flex;
-        }
-        .menu_item img{
-            height: 80px;
-        }
-        .footer {
-            font-size: 10px;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            margin-top: 100px;
-            background-color: #c2281a;
-            margin-bottom: 0;
-        }
-        .footer_content{
-            width: 90%;
-            margin: auto;
-            padding-top: 30px;
-        }
-        .footerButton{
-            display: flex;
-            justify-content: space-around;
             align-items: center;
-            flex-wrap: wrap;
-            margin: 10px auto;
-        }
-        .footer_button{
-            width: 200px;
-            height: 80px;
             display: flex;
-            background-color: #dd2d1d;
-            border: 1px solid #dd2d1d;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            box-sizing: border-box;
         }
-        .footer_button img{
-            width: 50px;
-            height: 50px;
-        }
-        .footer_button:hover{
-            background-color: #f83321;
-            cursor: pointer;
+
+        .menu_item img {
+            height: 80px;
         }
     </style>
     {% block extra_css %}{% endblock %}
