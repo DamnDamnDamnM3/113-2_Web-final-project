@@ -20,7 +20,7 @@
             <p>{% if product.description %}{{ product.description }}{% else %}&mdash;{% endif %}</p>
             <div class="price">${{ product.price|floatformat:2 }}</div>
             {% if user.is_authenticated %}
-            <form method="post" action="{% url 'shop:add_product_to_cart' product.id %}" class="add-cart-form">
+            <form method="post" action="{% url 'shop:add_to_cart' product.id %}" class="add-cart-form">
                 {% csrf_token %}
                 <div class="cart-row">
                     <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input">
