@@ -8,3 +8,12 @@ def social_links(request):
             {"name": "tk", "url": "https://www.tiktok.com/@sunbirds_official", "icon": "img/tiktok.png"},
         ]
     }
+
+def about_links(request):
+    return{
+        "about_links":[
+            {"name": "jva", "url": "https://www.jva.or.jp/", "icon": "img/jva.png"},
+            {"name": "sv", "url": "https://www.vleague.jp/", "icon": "img/sv.png"},
+            {"name": "sun", "url": "https://www.suntory.co.jp/culture-sports/sungoliath/", "icon": "img/sun.png"},
+        ]
+    }
