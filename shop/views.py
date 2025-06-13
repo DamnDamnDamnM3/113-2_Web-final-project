@@ -43,7 +43,7 @@ def register(request):
         messages.success(request, "註冊成功！")
         return redirect("shop:home")
 
-    return render(request, "shop/register.html")
+    return render(request, "registration/register.html")
 
 
 def login_view(request):
@@ -60,7 +60,7 @@ def login_view(request):
             return redirect(next_url) if next_url else redirect(reverse("shop:home"))
         else:
             messages.error(request, "用戶名或密碼錯誤")
-    return render(request, "shop/login.html", {"next": next_url})
+    return render(request, "registration/login.html", {"next": next_url})
 
 
 @login_required
