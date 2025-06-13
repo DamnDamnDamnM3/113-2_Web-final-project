@@ -116,6 +116,74 @@
         .menu_item img {
             height: 80px;
         }
+        .footer {
+            font-size: 10px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 100px;
+            background-color: #c2281a;
+            margin-bottom: 0;
+        }
+        .footer_content{
+            width: 90%;
+            margin: auto;
+            padding-top: 30px;
+        }
+        .footerButton{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 10px auto;
+        }
+        .footer_button{
+            width: 200px;
+            height: 80px;
+            display: flex;
+            background-color: #dd2d1d;
+            border: 1px solid #dd2d1d;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .footer_button img{
+            width: 50px;
+            height: 50px;
+        }
+        .footer_button:hover{
+            background-color: #f83321;
+            cursor: pointer;
+        }
+        .footer_up{
+            width: 90%;
+            margin: auto;
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 10px auto;
+            text-align: initial;
+        }
+        .footer_up img{
+            width: 200px;
+            height: 120px;
+        }
+        .footer_about{
+            width:200px;
+            height: 120px;
+            background-color: white;
+            border: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0; 
+        }
+        .footer_up_back{
+            background-color: #e3e3e3;
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -140,7 +208,6 @@
     </nav>
 
     {% block content %}{% endblock %}
-
     {% include 'shop/footer.html' %}
     {% block extra_js %}{% endblock %}
 </body>

@@ -8,7 +8,7 @@
 
 <div class="main-container">
     <div class="home-card">
-
+        <h1 class="home-title">歡迎來到 三得利太陽鳥</h1>
         <!-- 輪播區塊 -->
         <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -34,9 +34,11 @@
                 {% endfor %}
             </div>
         </div>
-
-        <h1 class="home-title">歡迎來到 三得利太陽鳥</h1>
-
+        <div class="news">
+            <h1 style="text-align: center;">WHAT'S NEW</h1>
+            <p style="text-align: center;">最新消息</p>
+            <button class="news-button">一覽</button>
+        </div>
     </div>
 </div>
 
@@ -44,6 +46,7 @@
 
 <style>
     .main-container {
+        margin-top: 20px;
         width: 90%;
         min-height: 80vh;
         display: flex;
@@ -75,6 +78,17 @@
         border-radius: 12px;
         display: block;
         margin: 0 auto;
+    }
+
+    .news-button{
+        width: 200px;
+        height: 60px;
+        background-color: #c2281a;
+        color: white;
+        border: 1px solid #c2281a;
+        font-size: larger;
+        text-align: center;
+        justify-content: center;
     }
 
     @media (max-width: 768px) {

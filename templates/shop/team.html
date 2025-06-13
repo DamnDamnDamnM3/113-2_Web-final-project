@@ -1,7 +1,51 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}球隊介紹{% endblock %}
+{% block title %}關於球隊{% endblock %}
+
 {% block content %}
-    <h1> sun</h1>
+
+<div class="main-container">
+    <div class="home-card">
+        <h1 class="home-title" style="color: #dd2d1d;">關於球隊</h1>
+        <p>SUNBIRDS 的「SUN」代表的是 SUNTORY 的「SUN」，同時也象徵太陽的「SUN」。</p>
+        <p>它被命名為 SUNBIRDS，因為它的想法是「像鳳凰一樣向燦爛的太陽扇動翅膀」。</p>
+        <p>SUNBIRDS 的目標是成為一隻擁有 「 技能、頭腦和力量 」三個節拍的 「 太陽鳥 」。</p>
+    </div>
+</div>
+
+
+<style>
+    .main-container {
+        margin-top: 20px;
+        width: 90%;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 32px rgba(10, 56, 130, 0.10);
+        padding: 24px 32px 40px 32px;
+        width: 90%;
+        text-align: center;
+    }
+
+
+
+    @media (max-width: 768px) {
+        .main-container {
+            min-height: 60vh;
+            padding: 0 2px;
+        }
+
+        .home-card {
+            width: 90%;
+            padding: 16px 8px 24px 8px;
+        }
+    }
+</style>
 {% endblock %}
