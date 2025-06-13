@@ -7,10 +7,43 @@
 
 <div class="main-container">
     <div class="home-card">
-        <h1 class="home-title" style="color: #dd2d1d;">關於球隊</h1>
+        <h1 class="team-title" style="color: #dd2d1d;">關於球隊</h1>
+        <h2 class="team-subtitle">球隊簡介</h2>
         <p>SUNBIRDS 的「SUN」代表的是 SUNTORY 的「SUN」，同時也象徵太陽的「SUN」。</p>
-        <p>它被命名為 SUNBIRDS，因為它的想法是「像鳳凰一樣向燦爛的太陽扇動翅膀」。</p>
-        <p>SUNBIRDS 的目標是成為一隻擁有 「 技能、頭腦和力量 」三個節拍的 「 太陽鳥 」。</p>
+        <p>「懷抱著如鳳凰般朝向燦爛耀眼的太陽展翅飛翔的信念」，因此命名為 SUNBIRDS。</p>
+        <p>SUNBIRDS 以成為兼具「技術、精神、力量」三要素的「太陽鳥」為目標。</p>
+        <img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo" style="height: 450px; padding: 50px;">
+        <div class="basic-info-up">
+            <button class="basic-info-up-bu">球隊名稱</button>
+            <button class="basic-info-up-bu">成立時間</button>
+            <button class="basic-info-up-bu">主場地區</button>
+        </div>
+        <div class="basic-info-down">
+            <p>三得利太陽鳥大阪</p>
+            <p>1973年4月</p>
+            <p>大阪市、箕面市</p>
+        </div>
+        <button class="history">球隊歷史</button>
+        <div class="uniforms-info">
+            <h2 class="team-subtitle">球衣</h2>
+            <div class="uniforms">
+                <div class="uniform">
+                    <p>1 st</p>
+                    <br>
+                    <img src="{% static 'img/uniform1.png' %}">
+                </div>
+                <div class="uniform">
+                    <p>2 nd</p>
+                    <br>
+                    <img src="{% static 'img/uniform2.png' %}">
+                </div>
+                <div class="uniform">
+                    <p>3 rd</p>
+                    <br>
+                    <img src="{% static 'img/uniform3.png' %}">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -33,9 +66,77 @@
         width: 90%;
         text-align: center;
     }
-
-
-
+    .basic-info-up{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 100px;
+    }
+    .basic-info-up-bu{
+        font-size: large;
+        font-weight: bold;
+        background-color: #ffc3be;
+        width: 200px;
+        height: 50px;
+        margin: 10px 0px;
+        border: 1px solid #ffc3be;
+        text-align: center;
+        justify-content: center;
+        padding: auto;
+    }
+    .basic-info-down {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 100px;
+        margin: 20px 0;
+    }
+    .basic-info-down p{
+        width: 200px;
+        text-align: center;
+        margin: 0;
+    }
+    .uniforms-info{
+        margin: 80px 0;
+    }
+    .uniforms{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .uniform{
+        font-size: larger;
+        width: 350px;
+        border: 2px solid #dd2d1d;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white;
+        transition: transform 0.3s ease-in-out;
+    }
+    .uniform img{
+        width: 250px;
+        height: 250px;
+    }
+    .uniform:hover {
+        transform: scale(1.5);
+    }
+    .history{
+        background-color: #dd2d1d;
+        color: white;
+        border: 1px solid #dd2d1d;
+        width: 200px;
+        height: 60px;
+        font-size: large;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .history:hover{
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        transform: scale(1.2);
+    }
     @media (max-width: 768px) {
         .main-container {
             min-height: 60vh;
