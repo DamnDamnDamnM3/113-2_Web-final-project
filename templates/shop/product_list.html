@@ -38,6 +38,12 @@
 </div>
 
 <style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
     .product-list {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -116,46 +122,51 @@
 
     .cart-row {
         display: flex;
-        align-items: stretch;
-        width: 100%;
-        gap: 0;
+        align-items: stretch !important;
+        justify-content: flex-start;
     }
 
     .qty-input {
         flex: 0 0 60px;
         height: 44px;
         border: 1.2px solid #bfc9d9;
+        border-right: none;
         border-radius: 6px 0 0 6px;
         text-align: center;
-        margin: 0;
-        padding: 0 6px;
-        border-right: none;
-        box-sizing: border-box;
         font-size: 1em;
-        line-height: 44px;
+        padding: 0;
+        margin: 0;
         background: #fff;
         outline: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
+
+    .qty-input::-webkit-inner-spin-button,
+    .qty-input::-webkit-outer-spin-button {
+        margin: 0;
+        -webkit-appearance: none;
+    }
+
 
     .cart-btn {
         flex: 1 1 0;
         height: 44px;
-        border-radius: 0 6px 6px 0;
         border: 1.2px solid #bfc9d9;
         border-left: none;
+        border-radius: 0 6px 6px 0;
         background: #0a3882;
         color: #fff;
         font-size: 1em;
         font-weight: 500;
         padding: 0;
-        text-align: center;
-        box-sizing: border-box;
-        transition: background 0.2s;
+        margin: 0;
         cursor: pointer;
-        outline: none;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        transition: background 0.2s;
     }
 
     .cart-btn:hover {
@@ -209,6 +220,10 @@
             gap: 12px;
             padding: 0 2px;
         }
+    }
+
+    .cart-row * {
+        margin: 0 !important;
     }
 </style>
 {% endblock %}
