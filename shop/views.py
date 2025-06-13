@@ -70,10 +70,6 @@ def logout_view(request):
     return redirect("shop:home")
 
 
-def hello(request):
-    return render(request, "shop/hello.html")
-
-
 def product_list(request):
     products = Product.objects.all()
     return render(request, "shop/product_list.html", {"products": products})
@@ -217,16 +213,16 @@ def history(request):
 
 
 def home(request):
-    return render(request, "shop/home.html")
+    return render(request, "main/home.html")
 
 
 def player_cards(request):
     cards = PlayerCard.objects.all()
-    return render(request, "shop/player_cards.html", {"cards": cards})
+    return render(request, "main/player_cards.html", {"cards": cards})
 
 
 def team(request):
-    return render(request, "shop/team.html")
+    return render(request, "main/team.html")
 
 
 @login_required
