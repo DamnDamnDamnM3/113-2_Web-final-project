@@ -1,6 +1,13 @@
 {% load static %}
 <div class="footer">
     <div class="footer_content">
+        <div class="footer_up">
+            {% for s in about_links %}
+                <button class="footer_about" onclick="window.open('{{ s.url }}', '_blank')">
+                    <img src="{% static s.icon %}" alt="{{ s.name }}">
+                </button>
+            {% endfor %}
+        </div>
         <p>&copy;SUNTORY SUNBIRDS</p>
         <a href="{% url 'shop:home' %}"><img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo" style="height: 80px;"></a>
         <div class="footerButton">
