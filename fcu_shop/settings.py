@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-bf)9w90c%$t5#84ylk8zvy5h!0n*qe0s9)j8m-ol8%nrq^o^@^
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ['https://web.jw-albert.dev']
-ALLOWED_HOSTS = ['web.jw-albert.dev']
+ALLOWED_HOSTS = ['web.jw-albert.dev' ,'192.168.50.11' ,'140.134.191.192', 'localhost', '0.0.0.0']
 
 # Application definition
 
