@@ -1,5 +1,5 @@
 """
-ASGI config for fcu_shop project.
+ASGI config for suntory_sunbirds project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fcu_shop.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'suntory_sunbirds.settings')
 
 application = get_asgi_application()
