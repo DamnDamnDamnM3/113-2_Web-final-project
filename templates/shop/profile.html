@@ -17,18 +17,20 @@
             </div>
         </div>
 
-        <div class="profile-content">
-            <div class="profile-info">
-                <h2>基本資料</h2>
-                <div class="info-group">
-                    <label>用戶名</label>
-                    <p>{{ user.username }}</p>
-                </div>
-                <div class="info-group">
-                    <label>電子郵件</label>
-                    <p>{{ user.email }}</p>
-                </div>
+        <div class="profile-info">
+            <h2>基本資料</h2>
+            <div class="info-group">
+                <label>用戶名</label>
+                <p>{{ user.username }}</p>
             </div>
+            <div class="info-group">
+                <label>電子郵件</label>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+
+        <div class="profile-content">
+
 
             <div class="purchase-history">
                 <h2>購物紀錄</h2>
@@ -137,9 +139,7 @@
     }
 
     .profile-content {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 32px;
+        margin-top: 32px;
     }
 
     .profile-info,
