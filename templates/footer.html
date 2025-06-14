@@ -1,0 +1,132 @@
+{% load static %}
+<div class="footer">
+    <div class="footer_up_back">
+        <div class="footer_content">
+            <div class="footer_up">
+                {% for s in about_links %}
+                <button class="footer_about" onclick="window.open('{{ s.url }}', '_blank')">
+                    <img src="{% static s.icon %}" alt="{{ s.name }}">
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="footer_content">
+        <a href="{% url 'shop:home' %}"><img src="{% static 'img/sunbirds_logo.png' %}" alt="sunbirds_logo"
+                style="height: 80px;"></a>
+        <div class="footerButton">
+            {% for s in social_links %}
+            <button class="footer_button" onclick="window.open('{{ s.url }}', '_blank')">
+                <img src="{% static s.icon %}" alt="{{ s.name }}">
+            </button>
+            {% endfor %}
+        </div>
+        <p>&copy;SUNTORY SUNBIRDS</p>
+    </div>
+</div>
+
+<style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .footer {
+        width: 100%;
+        background-color: #c2281a;
+        font-size: 10px;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 100px;
+        overflow-x: hidden;
+    }
+
+    .footer_about img,
+    .footer_button img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .footer_content,
+    .footer_up {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .footer_content {
+        width: 100%;
+        margin: auto;
+        padding-top: 30px;
+        box-sizing: border-box;
+    }
+
+    .footerButton {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer_button {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        margin: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer_button img {
+        object-fit: contain;
+        width: 30px;
+    }
+
+    .footer_button:hover {
+        background-color: transparent;
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .footer_up {
+        width: 90%;
+        margin: auto;
+        padding: 30px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        flex-wrap: wrap;
+        margin: 10px auto;
+    }
+
+    .footer_up img {
+        width: 200px;
+        height: 120px;
+    }
+
+    .footer_about {
+        width: 200px;
+        height: 120px;
+        background-color: white;
+        border: 1px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer_up_back {
+        background-color: #e3e3e3;
+    }
+</style>

@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}個人資料{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1 class="main-title">個人資料</h1>
+            <div class="profile-actions">
+                <button class="secondary-btn" onclick="showEditForm()">編輯資料</button>
+                <form method="post" action="{% url 'shop:logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="secondary-btn">登出</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="profile-info">
+            <h2>基本資料</h2>
+            <div class="info-group">
+                <label>用戶名</label>
+                <p>{{ user.username }}</p>
+            </div>
+            <div class="info-group">
+                <label>電子郵件</label>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+
+        <div class="profile-content">
+
+
+            <div class="purchase-history">
+                <h2>購物紀錄</h2>
+                {% if purchase_records %}
+                <div class="history-list">
+                    {% for record in purchase_records %}
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="order-date">{{ record.created_at|date:"Y/m/d H:i" }}</span>
+                            <span class="order-total">總計: ${{ record.total_price }}</span>
+                        </div>
+                        <div class="history-items">
+                            {% for item in record.purchaseitem_set.all %}
+                            <div class="history-item-detail">
+                                <span class="item-name">{{ item.product.name }}</span>
+                                <span class="item-quantity">x{{ item.quantity }}</span>
+                                <span class="item-price">${{ item.price }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="no-history">尚無購物紀錄</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 編輯資料表單 -->
+<div id="edit-form" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close" onclick="hideEditForm()">&times;</span>
+        <h2>編輯個人資料</h2>
+        <form method="post" action="{% url 'shop:update_profile' %}" class="edit-profile-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">電子郵件</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="current_password">目前密碼</label>
+                <input type="password" id="current_password" name="current_password" required>
+            </div>
+            <div class="form-group">
+                <label for="new_password">新密碼</label>
+                <input type="password" id="new_password" name="new_password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">確認新密碼</label>
+                <input type="password" id="confirm_password" name="confirm_password">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="main-btn">儲存</button>
+                <button type="button" class="secondary-btn" onclick="hideEditForm()">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .profile-container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        padding: 32px;
+    }
+
+    .profile-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        position: relative;
+        /* 幫助絕對定位用 */
+    }
+
+
+    .main-title {
+        color: #0a3882;
+        margin: 0;
+    }
+
+    .profile-actions {
+        display: flex !important;
+        gap: 12px !important;
+        position: absolute !important;
+        right: 0 !important;
+    }
+
+    .secondary-btn {
+        background: #f8f9fa;
+        color: #0a3882;
+        border: 1px solid #0a3882;
+        border-radius: 8px;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .secondary-btn:hover {
+        background: #0a3882;
+        color: #f8f9fa;
+    }
+
+    .profile-content {
+        margin-top: 32px;
+    }
+
+    .profile-info,
+    .purchase-history {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 24px;
+    }
+
+    .profile-info h2,
+    .purchase-history h2 {
+        color: #0a3882;
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+
+    .info-group {
+        margin-bottom: 16px;
+    }
+
+    .info-group label {
+        display: block;
+        color: #666;
+        margin-bottom: 4px;
+    }
+
+    .info-group p {
+        margin: 0;
+        color: #333;
+    }
+
+    .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .history-item {
+        background: #fff;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .order-date {
+        color: #666;
+        padding-right: 8px;
+    }
+
+    .order-total {
+        color: #0a3882;
+        font-weight: bold;
+    }
+
+    .history-items {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .history-item-detail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 15px;
+    }
+
+    .item-name {
+        flex: 1;
+    }
+
+    .item-quantity {
+        color: #666;
+        margin: 0 16px;
+    }
+
+    .item-price {
+        color: #0a3882;
+        font-weight: 500;
+    }
+
+    .no-history {
+        color: #666;
+        text-align: center;
+        padding: 32px;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: #fff;
+        border-radius: 12px;
+        padding: 32px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 24px;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .edit-profile-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-group label {
+        color: #333;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1em;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+
+    .main-btn {
+        background: #0a3882;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .main-btn:hover {
+        background: #3e92cc;
+    }
+
+    @media (max-width: 768px) {
+        .profile-content {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-header {
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+        }
+
+        .profile-actions {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .logout-form {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+    }
+
+    .profile-actions button {
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    function showEditForm() {
+        document.getElementById('edit-form').style.display = 'flex';
+    }
+
+    function hideEditForm() {
+        document.getElementById('edit-form').style.display = 'none';
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+/* 自定義樣式 */
+body {
+    background-color: #f8f9fa;;
+}
+
+.card-img-top {
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.navbar {
+    margin-bottom: 2rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+} 

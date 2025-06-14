@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}登入{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <div class="login-card">
+        <h1 class="main-title" style="font-size: 1.7em; margin-bottom: 28px;">登入</h1>
+        <form method="post" style="display: flex; flex-direction: column; align-items: center;">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div style="margin-bottom: 18px; width: 100%;">
+                <label for="username"
+                    style="display:block; font-weight: 500; color: #0a3882; margin-bottom: 6px; text-align: center;">使用者名稱</label>
+                <input type="text" id="username" name="username" required
+                    style="width: 90%; padding: 10px; border-radius: 6px; border: 1.2px solid #bfc9d9; font-size: 1em; display: block; margin: 0 auto; text-align: center;">
+            </div>
+            <div style="margin-bottom: 24px; width: 100%;">
+                <label for="password"
+                    style="display:block; font-weight: 500; color: #0a3882; margin-bottom: 6px; text-align: center;">密碼</label>
+                <input type="password" id="password" name="password" required
+                    style="width: 90%; padding: 10px; border-radius: 6px; border: 1.2px solid #bfc9d9; font-size: 1em; display: block; margin: 0 auto; text-align: center;">
+            </div>
+            <button type="submit" class="main-btn">登入</button>
+        </form>
+    </div>
+</div>
+<style>
+    .main-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 32px rgba(10, 56, 130, 0.10);
+        padding: 48px 32px 40px 32px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-btn {
+        background: #0a3882;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 0;
+        font-size: 1.1em;
+        width: 90%;
+        font-weight: 500;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(10, 56, 130, 0.08);
+        margin-top: 8px;
+        letter-spacing: 1px;
+    }
+
+    .main-btn:hover {
+        background: #3e92cc;
+        color: #fff;
+    }
+
+    @media (max-width: 700px) {
+        .main-container {
+            min-height: 60vh;
+            padding: 0 2px;
+        }
+
+        .login-card {
+            padding: 24px 8px 24px 8px;
+        }
+    }
+</style>
+{% endblock %}

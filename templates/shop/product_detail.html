@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}商品介紹{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- 商品圖片輪播 -->
+                    {% if has_images %}
+                    <div id="productImageCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+                        <div class="carousel-inner rounded-4 overflow-hidden text-center">
+                            {% for image in product.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block mx-auto img-fluid"
+                                    alt="{{ product.name }}">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if image_count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="text-center mb-4">
+                        <img src="https://via.placeholder.com/400x400?text=No+Image" class="img-fluid rounded-4"
+                            alt="No Image" style="height: 400px; object-fit: contain;">
+                    </div>
+                    {% endif %}
+
+                    <!-- 商品標題與價格 -->
+                    <h2 class="text-center fw-bold mb-2" style="color:#0a3882;">{{ product.name }}</h2>
+                    <p class="text-center text-danger fw-bold fs-4 mb-4">JP$ {{ product.price|floatformat:0 }}</p>
+
+                    <!-- 整個變體選擇+數量+送出表單 -->
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'shop:add_to_cart' product.id %}"
+                        class="d-flex flex-wrap justify-content-center gap-3 align-items-center mt-3">
+                        {% csrf_token %}
+                        <!-- 商品變體（SKU）選擇 -->
+                        {% if product.variants.exists %}
+                        <div class="text-center mb-4 w-100">
+                            <div class="mb-2 fw-semibold text-primary">請選擇商品規格</div>
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                {% for variant in product.variants.all %}
+                                <input type="radio" class="btn-check" name="variant_id" id="variant_{{ variant.id }}"
+                                    value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+                                <label class="btn btn-outline-primary px-4 py-3 rounded-3 text-start"
+                                    for="variant_{{ variant.id }}" style="min-width:240px;">
+                                    <div class="fw-bold">{{ variant.name }}</div>
+                                    <div class="text-secondary small mb-1">{{ variant.sku }}</div>
+                                    <div class="text-danger mb-1">JP$ {{ variant.price|floatformat:0 }}</div>
+                                    {% if variant.stock > 0 %}
+                                    <span class="badge bg-success">庫存: {{ variant.stock }}</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">缺貨</span>
+                                    {% endif %}
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <input type="number" name="quantity" value="1" min="1"
+                            class="form-control rounded-3 text-center" style="width: 120px; height: 45px;">
+
+                        <button type="submit" class="btn btn-primary px-4 py-2 rounded-3"
+                            style="background-color:#0a3882; border:none; height:45px;">
+                            加入購物車
+                        </button>
+
+                        <a href="{% url 'shop:product_list' %}" class="btn btn-outline-secondary px-4 py-2 rounded-3"
+                            style="height:45px;">
+                            返回列表
+                        </a>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-info mt-4 rounded-3">
+                        請先登入才能加入購物車。
+                    </div>
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <a href="{% url 'login' %}?next={% url 'shop:product_detail' product.id %}"
+                            class="btn btn-primary px-4 py-2 rounded-3"
+                            style="background-color:#0a3882; border:none; height:45px;">
+                            登入
+                        </a>
+                        <a href="{% url 'shop:product_list' %}" class="btn btn-outline-secondary px-4 py-2 rounded-3"
+                            style="height:45px;">
+                            返回列表
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- 商品描述 -->
+                    <div class="p-4 bg-light rounded-4 border mb-4 mt-4">
+                        <h5 class="product-subtitle">商品描述</h5>
+                        <p class="product-content">{{ product.description }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 美化樣式 -->
+<style>
+    .container {
+        justify-content: center;
+    }
+
+    .carousel-inner {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .carousel-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 0;
+        text-align: initial;
+        align-items: initial;
+        height: 400px;
+    }
+
+    .carousel-inner img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(1);
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .product-description {
+        max-width: 800px;
+        line-height: 1.8;
+        text-align: left;
+        /* 文字靠左 */
+    }
+
+    .product-subtitle {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-content {
+        text-align: left;
+        margin-bottom: 1.5rem;
+        white-space: pre-line;
+    }
+
+    @media (max-width: 768px) {
+        .carousel-item {
+            height: 300px;
+        }
+
+        .btn {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .form-control {
+            width: 100% !important;
+        }
+    }
+</style>
+{% endblock %}

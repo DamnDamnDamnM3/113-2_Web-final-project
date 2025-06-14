@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}歷史交易{% endblock %}
+{% block content %}
+<h1 class="mb-4">歷史交易</h1>
+{% for record in records %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="h5 mb-0">日期：{{ record.created_at|date:'Y-m-d H:i' }}，總價：{{ record.total_price|floatformat:0 }} 元</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for item in record.purchaseitem_set.all %}
+            <li class="list-group-item">{{ item.product.name }} x {{ item.quantity }} = {{ item.price|floatformat:0 }}元</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-info">
+    尚無交易紀錄。
+</div>
+{% endfor %}
+{% endblock %} 
