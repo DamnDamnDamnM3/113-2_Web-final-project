@@ -89,9 +89,9 @@
                     {% endif %}
 
                     <!-- 商品描述 -->
-                    <div class="mx-auto p-4 bg-light rounded-4 border mb-4" style="max-width:800px; line-height:1.8;">
-                        <h5 class="fw-bold text-primary mb-3">商品描述</h5>
-                        <p class="mb-0" style="white-space:pre-line;">{{ product.description }}</p>
+                    <div class="p-4 bg-light rounded-4 border mb-4">
+                        <h5 class="product-subtitle">商品描述</h5>
+                        <p class="product-content">{{ product.description }}</p>
                     </div>
 
                     <!-- 購物車與登入提示 -->
@@ -169,6 +169,27 @@
         filter: invert(1);
         width: 2.5rem;
         height: 2.5rem;
+    }
+
+    .product-description {
+        max-width: 800px;
+        line-height: 1.8;
+        text-align: left;
+        /* 文字靠左 */
+    }
+
+    .product-subtitle {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .product-content {
+        text-align: left;
+        margin-bottom: 1.5rem;
+        white-space: pre-line;
     }
 
     @media (max-width: 768px) {
