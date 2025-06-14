@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('shop.urls', namespace='shop')),
     path('login/', shop_views.login_view, name='login'),
     path('logout/', shop_views.logout_view, name='logout'),
+    path('deploy/', include('shop.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -14,9 +16,30 @@ from .models import (
     ProductVariant,
 )
 from django.urls import reverse
+import json
+import subprocess
 
 # Create your views here.
 
+@csrf_exempt
+def github_webhook(request):
+    if request.method == "POST":
+        payload = json.loads(request.body.decode("utf-8"))
+        ref = payload.get("ref", "")
+        if ref == "refs/heads/Python":  # 只處理 Python 分支
+            try:
+                result = subprocess.run(
+                    ["git", "-C", "/var/www/113-2_Web-final-project", "pull", "origin", "Python"],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                return HttpResponse(f"Pulled successfully:\n{result.stdout}", status=200)
+            except subprocess.CalledProcessError as e:
+                return HttpResponse(f"Git pull failed:\n{e.stderr}", status=500)
+        else:
+            return HttpResponse("Not Python branch. Ignored.", status=200)
+    return HttpResponse("Only POST method allowed.", status=405)
 
 def register(request):
     if request.method == "POST":

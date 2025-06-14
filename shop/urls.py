@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
+from .views import github_webhook
 
 app_name = "shop"
 
 urlpatterns = [
+    path('webhook/', github_webhook, name='github_webhook'),
     path("", views.home, name="home"),
     path("register/", views.register, name="register"),
     path("login/", views.login_view, name="login"),
