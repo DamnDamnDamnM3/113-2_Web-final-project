@@ -1,4 +1,10 @@
 # 113_2-Web_final_project
 
 ## TODO
-- 購物車沒有顯示細項 (by Albert) 6/14 1204
+- 主頁【球隊歷史】
+- ER Model
+- 球員卡
+- 購務車沒有顯示商品圖片
+- 金額顯示整數 -> floatformat:0
+- web's icon
+- 結帳壞掉了
