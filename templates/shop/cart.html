@@ -39,11 +39,7 @@
                     無規格資訊
                     {% endif %}
 
-
-
-
-
-                    <p class="cart-item-price">單價: ${{ item.product.price }}</p>
+                    <p class="cart-item-price">單價: JP${{ item.product.price|floatformat:0 }}</p>
                     <form method="post" action="{% url 'shop:update_cart' item.product.id %}" class="cart-item-form">
                         {% csrf_token %}
                         {% if item.variant %}
@@ -56,7 +52,7 @@
                         </div>
                     </form>
 
-                    <p class="cart-item-subtotal">小計: ${{ item.product.price|multiply:item.quantity }}</p>
+                    <p class="cart-item-subtotal">小計: JP${{ item.product.price|multiply:item.quantity|floatformat:0 }}</p>
                 </div>
                 <form method="post" action="{% url 'shop:remove_product_from_cart' item.product.id %}"
                     class="remove-form">
@@ -69,7 +65,7 @@
 
         <div class="cart-summary">
             <div class="cart-total">
-                <h2>總計: ${{ total }}</h2>
+                <h2>總計: JP${{ total|floatformat:0 }}</h2>
             </div>
             <div class="cart-actions">
                 <form method="post" action="{% url 'shop:clear_cart' %}" class="clear-cart-form">

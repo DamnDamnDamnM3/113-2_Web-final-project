@@ -26,7 +26,7 @@
                 {% endif %}
                 <h3>{{ product.name }}</h3>
                 <p>{% if product.description %}{{ product.description }}{% else %}&mdash;{% endif %}</p>
-                <div class="price">JP${{ product.price|floatformat:2 }}</div>
+                <div class="price">JP${{ product.price|floatformat:0 }}</div>
             </div>
         </a>
         {% endfor %}
