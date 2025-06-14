@@ -256,10 +256,10 @@ def checkout(request):
 
             訂單編號：{purchase_record.id}
             訂單時間：{purchase_record.created_at}
-            總金額：${purchase_record.total_price}
+            總金額：${int(purchase_record.total_price)}
 
             訂購商品：
-            {chr(10).join([f'- {item.product.name} x {item.quantity} (${item.price})' for item in purchase_record.purchaseitem_set.all()])}
+            {chr(10).join([f'- {item.product.name} x {item.quantity} (${int(item.price)})' for item in purchase_record.purchaseitem_set.all()])}
 
             如有任何問題，請隨時與我們聯繫。
 
