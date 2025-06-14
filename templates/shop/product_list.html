@@ -10,8 +10,14 @@
     <div class="product-list">
         {% for product in products %}
         <div class="product-card" data-product-id="{{ product.id }}">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-img" style="cursor:pointer;">
+            {% if product.images.exists %}
+            <div class="product-images">
+                {% for image in product.images.all %}
+                {% if forloop.first %}
+                <img src="{{ image.image.url }}" alt="{{ product.name }}" class="product-img" style="cursor:pointer;">
+                {% endif %}
+                {% endfor %}
+            </div>
             {% else %}
             <img src="https://via.placeholder.com/320x180?text=No+Image" alt="No Image" class="product-img"
                 style="cursor:pointer;">

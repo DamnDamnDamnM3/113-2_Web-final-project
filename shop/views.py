@@ -11,6 +11,7 @@ from .models import (
     PurchaseRecord,
     PurchaseItem,
     PlayerCard,
+    ProductVariant,
 )
 from django.urls import reverse
 
@@ -96,12 +97,26 @@ def add_card_to_cart(request, card_id):
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+    quantity = int(request.POST.get("quantity", 1))
+    
+    # 獲取選擇的變體
+    variant_id = request.POST.get("variant_id")
+    if variant_id:
+        variant = get_object_or_404(ProductVariant, id=variant_id)
+        price = variant.price or product.price
+    else:
+        variant = None
+        price = product.price
+
     cart_item, created = CartItem.objects.get_or_create(
-        user=request.user, product=product, defaults={"quantity": 1}
+        user=request.user,
+        product=product,
+        variant=variant,
+        defaults={"quantity": quantity, "price": price}
     )
 
     if not created:
-        cart_item.quantity += 1
+        cart_item.quantity += quantity
         cart_item.save()
 
     messages.success(request, f"已將 {product.name} 加入購物車！")
@@ -203,7 +218,11 @@ def checkout(request):
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    return render(request, "shop/product_detail.html", {"product": product})
+    variants = product.variants.all()
+    return render(request, "shop/product_detail.html", {
+        "product": product,
+        "variants": variants
+    })
 
 
 @login_required
