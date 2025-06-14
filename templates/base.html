@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SUNBIRDS{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <style>
         * {
             text-align: center;
@@ -116,6 +119,7 @@
         .menu_item img {
             height: 80px;
         }
+
         .footer {
             font-size: 10px;
             color: white;
@@ -124,19 +128,22 @@
             background-color: #c2281a;
             margin-bottom: 0;
         }
-        .footer_content{
+
+        .footer_content {
             width: 90%;
             margin: auto;
             padding-top: 30px;
         }
-        .footerButton{
+
+        .footerButton {
             display: flex;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
             margin: 10px auto;
         }
-        .footer_button{
+
+        .footer_button {
             width: 200px;
             height: 80px;
             display: flex;
@@ -147,15 +154,18 @@
             padding: 0;
             box-sizing: border-box;
         }
-        .footer_button img{
+
+        .footer_button img {
             width: 50px;
             height: 50px;
         }
-        .footer_button:hover{
+
+        .footer_button:hover {
             background-color: #f83321;
             cursor: pointer;
         }
-        .footer_up{
+
+        .footer_up {
             width: 90%;
             margin: auto;
             padding: 30px 0;
@@ -167,21 +177,24 @@
             margin: 10px auto;
             text-align: initial;
         }
-        .footer_up img{
+
+        .footer_up img {
             width: 200px;
             height: 120px;
         }
-        .footer_about{
-            width:200px;
+
+        .footer_about {
+            width: 200px;
             height: 120px;
             background-color: white;
             border: 1px solid white;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0; 
+            margin: 0;
         }
-        .footer_up_back{
+
+        .footer_up_back {
             background-color: #e3e3e3;
         }
     </style>
@@ -210,6 +223,11 @@
     {% block content %}{% endblock %}
     {% include 'footer.html' %}
     {% block extra_js %}{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
 </body>
 
 </html>

@@ -139,15 +139,24 @@
 
 <!-- 美化樣式 -->
 <style>
-    .carousel-item {
-        height: 420px;
+    .carousel-inner {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .carousel-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 0;
+        text-align: initial;
+        align-items: initial;
+        height: 400px;
     }
 
     .carousel-inner img {
         max-height: 100%;
+        max-width: 100%;
         object-fit: contain;
     }
 
