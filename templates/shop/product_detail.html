@@ -14,7 +14,7 @@
                             {% for image in product.images.all %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                 <img src="{{ image.image.url }}" class="d-block mx-auto img-fluid"
-                                     alt="{{ product.name }}">
+                                    alt="{{ product.name }}">
                             </div>
                             {% endfor %}
                         </div>
@@ -33,8 +33,8 @@
                     </div>
                     {% else %}
                     <div class="text-center mb-4">
-                        <img src="https://via.placeholder.com/400x400?text=No+Image"
-                             class="img-fluid rounded-4" alt="No Image" style="height: 400px; object-fit: contain;">
+                        <img src="https://via.placeholder.com/400x400?text=No+Image" class="img-fluid rounded-4"
+                            alt="No Image" style="height: 400px; object-fit: contain;">
                     </div>
                     {% endif %}
 
@@ -43,6 +43,7 @@
                     <p class="text-center text-danger fw-bold fs-4 mb-4">NT$ {{ product.price|floatformat:0 }}</p>
 
                     <!-- 商品選項 -->
+                    {% comment %}
                     {% if has_options %}
                     <div class="text-center mb-4">
                         {% for option in product.options.all %}
@@ -50,15 +51,40 @@
                         <div class="d-flex flex-wrap justify-content-center gap-2">
                             {% for value in option.values.all %}
                             <input type="radio" class="btn-check" name="option_{{ option.id }}"
-                                   id="option_{{ option.id }}_{{ value.id }}" value="{{ value.id }}"
-                                   {% if forloop.first %}checked{% endif %}>
+                                id="option_{{ option.id }}_{{ value.id }}" value="{{ value.id }}" {% if forloop.first
+                                %}checked{% endif %}>
                             <label class="btn btn-outline-secondary px-3 py-2 rounded-pill"
-                                   for="option_{{ option.id }}_{{ value.id }}">
+                                for="option_{{ option.id }}_{{ value.id }}">
                                 {{ value.value }}
                             </label>
                             {% endfor %}
                         </div>
                         {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endcomment %}
+
+                    <!-- 商品變體（SKU）選擇 -->
+                    {% if product.variants.exists %}
+                    <div class="text-center mb-4">
+                        <div class="mb-2 fw-semibold text-primary">請選擇商品規格</div>
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            {% for variant in product.variants.all %}
+                            <input type="radio" class="btn-check" name="variant_id" id="variant_{{ variant.id }}"
+                                value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+                            <label class="btn btn-outline-primary px-4 py-3 rounded-3 text-start"
+                                for="variant_{{ variant.id }}" style="min-width:240px;">
+                                <div class="fw-bold">{{ variant.name }}</div>
+                                <div class="text-secondary small mb-1">SKU：{{ variant.sku }}</div>
+                                <div class="text-danger mb-1">NT$ {{ variant.price|floatformat:0 }}</div>
+                                {% if variant.stock > 0 %}
+                                <span class="badge bg-success">庫存: {{ variant.stock }}</span>
+                                {% else %}
+                                <span class="badge bg-danger">缺貨</span>
+                                {% endif %}
+                            </label>
+                            {% endfor %}
+                        </div>
                     </div>
                     {% endif %}
 
@@ -72,18 +98,18 @@
                     <div class="text-center">
                         {% if user.is_authenticated %}
                         <form method="post" action="{% url 'shop:add_to_cart' product.id %}"
-                              class="d-flex flex-wrap justify-content-center gap-3 align-items-center mt-3">
+                            class="d-flex flex-wrap justify-content-center gap-3 align-items-center mt-3">
                             {% csrf_token %}
                             <input type="number" name="quantity" value="1" min="1"
-                                   class="form-control rounded-3 text-center"
-                                   style="width: 120px; height: 45px;">
+                                class="form-control rounded-3 text-center" style="width: 120px; height: 45px;">
+                            {# 新增隱藏欄位，將選擇的 variant_id 傳給後端 #}
+                            {# 由於 radio name="variant_id"，表單會自動帶入選中的 variant_id #}
                             <button type="submit" class="btn btn-primary px-4 py-2 rounded-3"
-                                    style="background-color:#0a3882; border:none; height:45px;">
+                                style="background-color:#0a3882; border:none; height:45px;">
                                 加入購物車
                             </button>
                             <a href="{% url 'shop:product_list' %}"
-                               class="btn btn-outline-secondary px-4 py-2 rounded-3"
-                               style="height:45px;">
+                                class="btn btn-outline-secondary px-4 py-2 rounded-3" style="height:45px;">
                                 返回列表
                             </a>
                         </form>
@@ -93,12 +119,12 @@
                         </div>
                         <div class="d-flex justify-content-center gap-3 mt-3">
                             <a href="{% url 'login' %}?next={% url 'shop:product_detail' product.id %}"
-                               class="btn btn-primary px-4 py-2 rounded-3"
-                               style="background-color:#0a3882; border:none; height:45px;">
+                                class="btn btn-primary px-4 py-2 rounded-3"
+                                style="background-color:#0a3882; border:none; height:45px;">
                                 登入
                             </a>
                             <a href="{% url 'shop:product_list' %}"
-                               class="btn btn-outline-secondary px-4 py-2 rounded-3" style="height:45px;">
+                                class="btn btn-outline-secondary px-4 py-2 rounded-3" style="height:45px;">
                                 返回列表
                             </a>
                         </div>
