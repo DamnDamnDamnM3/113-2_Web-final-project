@@ -220,11 +220,8 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     variants = product.variants.all()
 
-    # 處理圖片資訊
     has_images = product.images.exists()
     image_count = product.images.count()
-
-    # 處理選項資訊
     has_options = product.options.exists()
 
     return render(request, "shop/product_detail.html", {
@@ -234,8 +231,6 @@ def product_detail(request, product_id):
         "image_count": image_count,
         "has_options": has_options
     })
-
-
 
 
 @login_required
