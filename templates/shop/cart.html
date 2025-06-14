@@ -14,8 +14,11 @@
         {% for item in cart_items %}
         <div class="cart-item">
             <div class="cart-item-content">
-                {% if item.product.image %}
-                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-img">
+                {% if item.product.images.exists %}
+                <img src="{{ item.product.images.first.image.url }}" alt="{{ item.product.name }}"
+                    class="cart-item-img">
+                {% else %}
+                <img src="https://via.placeholder.com/110x110?text=No+Image" alt="No Image" class="cart-item-img">
                 {% endif %}
                 <div class="cart-item-details">
                     <h3>{{ item.product.name }}</h3>
@@ -52,7 +55,8 @@
                         </div>
                     </form>
 
-                    <p class="cart-item-subtotal">小計: JP${{ item.product.price|multiply:item.quantity|floatformat:0 }}</p>
+                    <p class="cart-item-subtotal">小計: JP${{ item.product.price|multiply:item.quantity|floatformat:0 }}
+                    </p>
                 </div>
                 <form method="post" action="{% url 'shop:remove_product_from_cart' item.product.id %}"
                     class="remove-form">
@@ -126,8 +130,8 @@
     }
 
     .cart-item-img {
-        width: 110px;
-        height: 110px;
+        width: 150px;
+        height: 150px;
         object-fit: cover;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(10, 56, 130, 0.08);
