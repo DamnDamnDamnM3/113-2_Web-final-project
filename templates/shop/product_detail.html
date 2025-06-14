@@ -40,7 +40,7 @@
 
                     <!-- 商品標題與價格 -->
                     <h2 class="text-center fw-bold mb-2" style="color:#0a3882;">{{ product.name }}</h2>
-                    <p class="text-center text-danger fw-bold fs-4 mb-4">NT$ {{ product.price|floatformat:0 }}</p>
+                    <p class="text-center text-danger fw-bold fs-4 mb-4">JP$ {{ product.price|floatformat:0 }}</p>
 
                     <!-- 整個變體選擇+數量+送出表單 -->
                     {% if user.is_authenticated %}
