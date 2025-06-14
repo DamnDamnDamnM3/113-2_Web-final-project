@@ -203,13 +203,13 @@ def checkout(request):
         # 創建購買記錄
         purchase_record = PurchaseRecord.objects.create(
             user=request.user,
-            total_amount=sum(item.product.price * item.quantity for item in cart_items),
+            total_price=sum(item.product.price * item.quantity for item in cart_items),
         )
 
         # 添加購買項目
         for item in cart_items:
             PurchaseItem.objects.create(
-                purchase_record=purchase_record,
+                purchase=purchase_record,
                 product=item.product,
                 quantity=item.quantity,
                 price=item.product.price,
@@ -225,10 +225,10 @@ def checkout(request):
 
             訂單編號：{purchase_record.id}
             訂單時間：{purchase_record.created_at}
-            總金額：${purchase_record.total_amount}
+            總金額：${purchase_record.total_price}
 
             訂購商品：
-            {chr(10).join([f'- {item.product.name} x {item.quantity} (${item.price})' for item in purchase_record.items.all()])}
+            {chr(10).join([f'- {item.product.name} x {item.quantity} (${item.price})' for item in purchase_record.purchaseitem_set.all()])}
 
             如有任何問題，請隨時與我們聯繫。
 
@@ -247,8 +247,8 @@ def checkout(request):
         # 清空購物車
         cart_items.delete()
 
-        return redirect("profile")
-    return redirect("cart")
+        return redirect("shop:profile")
+    return redirect("shop:cart")
 
 
 def product_detail(request, product_id):
@@ -266,12 +266,6 @@ def product_detail(request, product_id):
         "image_count": image_count,
         "has_options": has_options
     })
-
-
-@login_required
-def history(request):
-    records = PurchaseRecord.objects.filter(user=request.user).order_by("-created_at")
-    return render(request, "shop/history.html", {"records": records})
 
 
 def home(request):
