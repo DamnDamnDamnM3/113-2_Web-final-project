@@ -41,6 +41,5 @@ urlpatterns = [
         views.remove_card_from_cart,
         name="remove_card_from_cart",
     ),
-    path("history/", views.history, name="history"),
     path("team/", views.team, name="team"),
 ]
