@@ -235,7 +235,7 @@ def checkout(request):
             祝您購物愉快！
             """
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [request.user.email]
+            recipient_list = [request.user.email, "admin@mail.jw-albert.tw"]
 
             print(f"Attempting to send email to {recipient_list}")  # 調試信息
             send_mail(subject, message, from_email, recipient_list)
