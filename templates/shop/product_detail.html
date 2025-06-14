@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}商品介紹{% endblock %}
 {% block content %}
-<div class="container py-4">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center mb-0">商品介紹</h3>
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-header bg-white border-0 pb-0 pt-4">
+                    <h3 class="text-center mb-0" style="color:#0a3882;font-weight:bold;letter-spacing:2px;">商品介紹</h3>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="product-images">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-4 align-items-center flex-column flex-md-row">
+                        <div class="col-12 col-md-6 mb-4 mb-md-0">
+                            <div class="product-images mb-4">
                                 {% if product.images.exists %}
                                 <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner">
+                                    <div class="carousel-inner rounded-4 overflow-hidden">
                                         {% for image in product.images.all %}
                                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                            <img src="{{ image.image.url }}" class="d-block w-100 rounded"
-                                                alt="{{ product.name }}">
+                                            <img src="{{ image.image.url }}" class="d-block w-100 rounded-4"
+                                                alt="{{ product.name }}" style="object-fit: contain; height: 400px;">
                                         </div>
                                         {% endfor %}
                                     </div>
@@ -36,27 +36,28 @@
                                     {% endif %}
                                 </div>
                                 {% else %}
-                                <img src="https://via.placeholder.com/400x400?text=No+Image" class="img-fluid rounded"
-                                    alt="No Image">
+                                <img src="https://via.placeholder.com/400x400?text=No+Image" class="img-fluid rounded-4"
+                                    alt="No Image" style="height: 400px; object-fit: contain;">
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <h4 class="card-title">{{ product.name }}</h4>
-                            <p class="card-text text-danger h5">NT$ {{ product.price|floatformat:0 }}</p>
+                        <div class="col-12 col-md-6">
+                            <h4 class="card-title mb-3" style="color:#0a3882;font-weight:bold;font-size:1.8rem;">{{ product.name }}</h4>
+                            <p class="card-text text-danger h4 mb-4 fw-bold">NT$ {{ product.price|floatformat:0 }}</p>
 
                             {% if product.options.exists %}
                             <div class="product-options mb-4">
                                 {% for option in product.options.all %}
-                                <div class="option-group mb-3">
-                                    <h5>{{ option.name }}</h5>
-                                    <div class="option-values">
+                                <div class="option-group mb-4">
+                                    <h6 class="mb-3" style="color:#3e92cc;font-weight:bold;font-size:1.1rem;">{{ option.name }}</h6>
+                                    <div class="option-values d-flex flex-wrap gap-2">
                                         {% for value in option.values.all %}
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline mb-2">
                                             <input class="form-check-input" type="radio" name="option_{{ option.id }}"
-                                                id="option_{{ option.id }}_{{ value.id }}" value="{{ value.id }}" {% if
-                                                forloop.first %}checked{% endif %}>
-                                            <label class="form-check-label" for="option_{{ option.id }}_{{ value.id }}">
+                                                id="option_{{ option.id }}_{{ value.id }}" value="{{ value.id }}" {% if forloop.first %}checked{% endif %}>
+                                            <label class="form-check-label px-3 py-2 rounded-3 border"
+                                                style="background:#f8fafc;cursor:pointer;transition:all 0.2s;"
+                                                for="option_{{ option.id }}_{{ value.id }}">
                                                 {{ value.value }}
                                             </label>
                                         </div>
@@ -67,19 +68,33 @@
                             </div>
                             {% endif %}
 
-                            <div class="card-text mb-4">
-                                <h5>商品描述：</h5>
-                                <p>{{ product.description }}</p>
+                            <div class="card-text mb-4 p-4 bg-light rounded-4 border">
+                                <h6 class="mb-3" style="color:#0a3882;font-weight:bold;font-size:1.1rem;">商品描述：</h6>
+                                <p class="mb-0" style="white-space:pre-line;line-height:1.6;">{{ product.description }}
+                                </p>
                             </div>
 
+                            {% if user.is_authenticated %}
                             <form method="post" action="{% url 'shop:add_to_cart' product.id %}"
-                                class="d-flex gap-2 align-items-center">
+                                class="d-flex flex-wrap gap-3 align-items-center mt-4">
                                 {% csrf_token %}
-                                <input type="number" name="quantity" value="1" min="1" class="form-control"
-                                    style="width: 80px;">
-                                <button type="submit" class="btn btn-primary">加入購物車</button>
-                                <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">返回列表</a>
+                                <input type="number" name="quantity" value="1" min="1" class="form-control rounded-3"
+                                    style="width: 100px;max-width:120px;height:45px;">
+                                <button type="submit" class="btn btn-primary px-4 py-2 rounded-3"
+                                    style="background-color:#0a3882;border:none;height:45px;">加入購物車</button>
+                                <a href="{% url 'shop:product_list' %}"
+                                    class="btn btn-outline-secondary px-4 py-2 rounded-3" style="height:45px;">返回列表</a>
                             </form>
+                            {% else %}
+                            <div class="alert alert-info mt-4 rounded-3">請先登入才能加入購物車。</div>
+                            <div class="d-flex gap-3 mt-3">
+                                <a href="{% url 'login' %}?next={% url 'shop:product_detail' product.id %}"
+                                    class="btn btn-primary px-4 py-2 rounded-3"
+                                    style="background-color:#0a3882;border:none;height:45px;">登入</a>
+                                <a href="{% url 'shop:product_list' %}"
+                                    class="btn btn-outline-secondary px-4 py-2 rounded-3" style="height:45px;">返回列表</a>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -87,34 +102,29 @@
         </div>
     </div>
 </div>
+<style>
+    @media (max-width: 768px) {
+        .card-body.p-4 {
+            padding: 1.5rem !important;
+        }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // 獲取所有選項組
-        const optionGroups = document.querySelectorAll('.option-group');
+        .product-images img {
+            max-height: 300px;
+            object-fit: contain;
+        }
 
-        // 為每個選項組添加事件監聽器
-        optionGroups.forEach(group => {
-            const inputs = group.querySelectorAll('input[type="radio"]');
-            inputs.forEach(input => {
-                input.addEventListener('change', updateVariant);
-            });
-        });
-    });
+        .card-title,
+        .card-text {
+            text-align: center;
+        }
 
-    function updateVariant() {
-        // 獲取所有選中的選項值
-        const selectedOptions = {};
-        document.querySelectorAll('.option-group').forEach(group => {
-            const selectedInput = group.querySelector('input[type="radio"]:checked');
-            if (selectedInput) {
-                selectedOptions[selectedInput.name] = selectedInput.value;
-            }
-        });
+        .option-values {
+            justify-content: center;
+        }
 
-        // 這裡可以添加 AJAX 請求來獲取變體信息
-        // 例如：價格、庫存等
-        console.log('Selected options:', selectedOptions);
+        .form-check-inline {
+            margin-right: 0;
+        }
     }
-</script>
+</style>
 {% endblock %}

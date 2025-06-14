@@ -9,36 +9,26 @@
     <h1 class="main-title">購物網站</h1>
     <div class="product-list">
         {% for product in products %}
-        <div class="product-card" data-product-id="{{ product.id }}">
-            {% if product.images.exists %}
-            <div class="product-images">
-                {% for image in product.images.all %}
-                {% if forloop.first %}
-                <img src="{{ image.image.url }}" alt="{{ product.name }}" class="product-img" style="cursor:pointer;">
-                {% endif %}
-                {% endfor %}
-            </div>
-            {% else %}
-            <img src="https://via.placeholder.com/320x180?text=No+Image" alt="No Image" class="product-img"
-                style="cursor:pointer;">
-            {% endif %}
-            <h3>{{ product.name }}</h3>
-            <p>{% if product.description %}{{ product.description }}{% else %}&mdash;{% endif %}</p>
-            <div class="price">${{ product.price|floatformat:2 }}</div>
-            {% if user.is_authenticated %}
-            <form method="post" action="{% url 'shop:add_to_cart' product.id %}" class="add-cart-form">
-                {% csrf_token %}
-                <div class="cart-row">
-                    <input type="number" name="quantity" value="1" min="1" max="99" class="qty-input">
-                    <button type="submit" class="main-btn cart-btn">加入購物車</button>
+        <a href="{% url 'shop:product_detail' product.id %}" class="product-card-link">
+            <div class="product-card" data-product-id="{{ product.id }}">
+                {% if product.images.exists %}
+                <div class="product-images">
+                    {% for image in product.images.all %}
+                    {% if forloop.first %}
+                    <img src="{{ image.image.url }}" alt="{{ product.name }}" class="product-img"
+                        style="cursor:pointer;">
+                    {% endif %}
+                    {% endfor %}
                 </div>
-            </form>
-            {% else %}
-            <div class="login-link">
-                <a href="{% url 'login' %}?next={% url 'shop:product_list' %}" class="main-btn">登入後購買</a>
+                {% else %}
+                <img src="https://via.placeholder.com/320x180?text=No+Image" alt="No Image" class="product-img"
+                    style="cursor:pointer;">
+                {% endif %}
+                <h3>{{ product.name }}</h3>
+                <p>{% if product.description %}{{ product.description }}{% else %}&mdash;{% endif %}</p>
+                <div class="price">${{ product.price|floatformat:2 }}</div>
             </div>
-            {% endif %}
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
@@ -230,6 +220,17 @@
 
     .cart-row * {
         margin: 0 !important;
+    }
+
+    .product-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .product-card-link:hover .product-card {
+        box-shadow: 0 8px 32px rgba(10, 56, 130, 0.13);
+        border: 1.5px solid #3e92cc;
     }
 </style>
 {% endblock %}
