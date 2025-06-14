@@ -10,6 +10,7 @@
 
     {% if cart_items %}
     <div class="cart-container">
+
         {% for item in cart_items %}
         <div class="cart-item">
             <div class="cart-item-content">
@@ -18,15 +19,32 @@
                 {% endif %}
                 <div class="cart-item-details">
                     <h3>{{ item.product.name }}</h3>
+
+                    {% if item.variant %}
+                    <p>規格：
+                        {% for option_value in item.variant.option_values.all %}
+                        {{ option_value.value }}{% if not forloop.last %}，{% endif %}
+                        {% endfor %}
+                    </p>
+                    {% else %}
+                    無規格資訊
+                    {% endif %}
+
+
+
                     <p class="cart-item-price">單價: ${{ item.product.price }}</p>
                     <form method="post" action="{% url 'shop:update_cart' item.product.id %}" class="cart-item-form">
                         {% csrf_token %}
+                        {% if item.variant %}
+                        <input type="hidden" name="variant_id" value="{{ item.variant.id }}">
+                        {% endif %}
                         <div class="cart-row">
                             <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                 class="qty-input">
                             <button type="submit" class="main-btn update-btn">更新</button>
                         </div>
                     </form>
+
                     <p class="cart-item-subtotal">小計: ${{ item.product.price|multiply:item.quantity }}</p>
                 </div>
                 <form method="post" action="{% url 'shop:remove_product_from_cart' item.product.id %}"

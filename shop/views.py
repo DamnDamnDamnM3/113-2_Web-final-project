@@ -121,8 +121,7 @@ def add_card_to_cart(request, card_id):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get("quantity", 1))
-    
-    # 獲取選擇的變體
+
     variant_id = request.POST.get("variant_id")
     if variant_id:
         variant = get_object_or_404(ProductVariant, id=variant_id)
@@ -141,6 +140,8 @@ def add_to_cart(request, product_id):
     if not created:
         cart_item.quantity += quantity
         cart_item.save()
+    
+    print(f"CartItem created: {created}, user: {request.user}, product: {product}, variant: {variant}, quantity: {cart_item.quantity}")
 
     messages.success(request, f"已將 {product.name} 加入購物車！")
     return redirect("shop:cart")
@@ -150,13 +151,24 @@ def add_to_cart(request, product_id):
 def update_cart(request, product_id):
     if request.method == "POST":
         quantity = int(request.POST.get("quantity", 1))
-        cart_item = get_object_or_404(
-            CartItem, user=request.user, product_id=product_id
-        )
+        variant_id = request.POST.get("variant_id")
+
+        filters = {
+            "user": request.user,
+            "product_id": product_id,
+        }
+
+        if variant_id:
+            filters["variant_id"] = variant_id
+        else:
+            filters["variant__isnull"] = True
+
+        cart_item = get_object_or_404(CartItem, **filters)
         cart_item.quantity = quantity
         cart_item.save()
         messages.success(request, "購物車已更新")
     return redirect("shop:cart")
+
 
 
 @login_required
@@ -277,8 +289,8 @@ def team(request):
 
 @login_required
 def cart(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total = sum(item.product.price * item.quantity for item in cart_items)
+    cart_items = CartItem.objects.filter(user=request.user).select_related('variant', 'product')
+    total = sum((item.price or item.product.price) * item.quantity for item in cart_items)
     return render(request, "shop/cart.html", {"cart_items": cart_items, "total": total})
 
 
