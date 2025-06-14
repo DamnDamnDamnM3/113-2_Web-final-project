@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="main-container">
-    <h1 class="main-title">購物車車</h1>
+    <h1 class="main-title">購物車</h1>
 
     {% if cart_items %}
     <div class="cart-container">
@@ -23,12 +23,23 @@
                     {% if item.variant %}
                     <p>規格：
                         {% for option_value in item.variant.option_values.all %}
-                        {{ option_value.value }}{% if not forloop.last %}，{% endif %}
+                        {% if option_value.option.name == "サイズ" %}
+                        {{ option_value.value }}
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {% for option_value in item.variant.option_values.all %}
+                        {% if option_value.option.name == "スタイル" %}
+                        {{ option_value.value }}
+                        {% endif %}
                         {% endfor %}
                     </p>
                     {% else %}
                     無規格資訊
                     {% endif %}
+
+
 
 
 

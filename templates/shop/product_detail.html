@@ -58,7 +58,7 @@
                                 <label class="btn btn-outline-primary px-4 py-3 rounded-3 text-start"
                                     for="variant_{{ variant.id }}" style="min-width:240px;">
                                     <div class="fw-bold">{{ variant.name }}</div>
-                                    <div class="text-secondary small mb-1">SKU：{{ variant.sku }}</div>
+                                    <div class="text-secondary small mb-1">{{ variant.sku }}</div>
                                     <div class="text-danger mb-1">NT$ {{ variant.price|floatformat:0 }}</div>
                                     {% if variant.stock > 0 %}
                                     <span class="badge bg-success">庫存: {{ variant.stock }}</span>
@@ -160,7 +160,6 @@
         margin-top: 1.5rem;
         margin-bottom: 0.5rem;
     }
-
 
     .product-content {
         text-align: left;
