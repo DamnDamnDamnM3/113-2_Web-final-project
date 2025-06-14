@@ -7,40 +7,40 @@
 <h1 style="margin-top: 20px;">排球隊球員介紹</h1>
 <div class="cardRow">
     {% for card in cards %}
-    <div class="container">
-        <div class="playerCard">
-            <img src="{{ card.image.url }}" width="200">
-            <h3>{{ card.name }}</h3>
-            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-            <p>{{ card.description }}</p>
-        </div>
-        <div class="playerCard">
-            <img src="{{ card.image.url }}" width="200">
-            <h3>{{ card.name }}</h3>
-            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-            <p>{{ card.description }}</p>
-        </div>
-        <div class="playerCard">
-            <img src="{{ card.image.url }}" width="200">
-            <h3>{{ card.name }}</h3>
-            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-            <p>{{ card.description }}</p>
-        </div>
-        <div class="playerCard">
-            <img src="{{ card.image.url }}" width="200">
-            <h3>{{ card.name }}</h3>
-            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-            <p>{{ card.description }}</p>
-        </div>
-        <div class="playerCard">
-            <img src="{{ card.image.url }}" width="200">
-            <h3>{{ card.name }}</h3>
-            <p>#{{ card.number }} | 位置：{{ card.position }}</p>
-            <p>{{ card.description }}</p>
-        </div>
+    <div class="playerCard">
+        <img src="{{ card.image.url }}" width="200">
+        <h5>{{ card.name }}</h5>
+        <p>#{{ card.number }} | 位置：{{ card.position }}</p>
+        <p>{{ card.description }}</p>
     </div>
     {% empty %}
     <p>目前沒有球員資料。</p>
     {% endfor %}
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tight-p {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .playerCard p {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .playerCard h5 {
+        font-weight: bold;
+    }
+
+    .cardRow {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 20px;
+    }
+</style>
 {% endblock %}
