@@ -64,4 +64,5 @@ urlpatterns = [
     # 球隊相關路由
     # Team Route
     path("team/", views.team, name="team"),                             # 球隊頁面
+    path('news/<int:news_id>/', views.news_detail, name='news_detail'), # 新消息詳細頁面
 ]

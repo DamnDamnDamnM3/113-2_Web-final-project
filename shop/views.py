@@ -14,6 +14,7 @@ from .models import (
     PurchaseItem,
     PlayerCard,
     ProductVariant,
+    News,
 )
 from django.urls import reverse
 import json
@@ -235,8 +236,8 @@ def checkout(request):
             total_price=sum(item.product.price * item.quantity for item in cart_items),
         )
 
-        # 添加購買項目
-        # Add purchase items
+        # 添加購買項目並更新庫存
+        # Add purchase items and update stock
         for item in cart_items:
             PurchaseItem.objects.create(
                 purchase=purchase_record,
@@ -244,6 +245,18 @@ def checkout(request):
                 quantity=item.quantity,
                 price=item.product.price,
             )
+            
+            # 更新商品變體庫存
+            # Update product variant stock
+            if item.variant:
+                variant = item.variant
+                if variant.stock >= item.quantity:
+                    variant.stock -= item.quantity
+                    variant.save()
+                else:
+                    messages.error(request, f"商品 {item.product.name} 的庫存不足")
+                    purchase_record.delete()
+                    return redirect("shop:cart")
 
         # 發送確認郵件
         # Send confirmation email
@@ -259,7 +272,7 @@ def checkout(request):
             總金額：${int(purchase_record.total_price)}
 
             訂購商品：
-            {chr(10).join([f'- {item.product.name} x {item.quantity} (${int(item.price)})' for item in purchase_record.purchaseitem_set.all()])}
+            {chr(10).join([f'            - {item.product.name} x {item.quantity} (${int(item.price)})' for item in purchase_record.purchaseitem_set.all()])}
 
             如有任何問題，請隨時與我們聯繫。
 
@@ -305,7 +318,10 @@ def product_detail(request, product_id):
 # 首頁視圖 - 顯示網站首頁
 # Home Page View - Display website homepage
 def home(request):
-    return render(request, "main/home.html")
+    latest_news = News.objects.order_by('-date')[:4]  # 最新的4則消息
+    return render(request, "main/home.html", {
+        "latest_news": latest_news
+    })
 
 # 球員卡列表視圖 - 顯示所有球員卡
 # Player Cards List View - Display all player cards
@@ -372,3 +388,8 @@ def update_profile(request):
         return redirect("shop:profile")
 
     return redirect("shop:profile")
+
+# 新消息詳細內容頁面
+def news_detail(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    return render(request, "main/news_detail.html", {"news": news})

@@ -9,6 +9,7 @@ from .models import (
     PurchaseRecord,
     PurchaseItem,
     PlayerCard,
+    News
 )
 
 # 產品選項值內嵌管理介面
@@ -99,3 +100,12 @@ class PlayerCardAdmin(admin.ModelAdmin):
     list_display = ("name", "position", "number")  # 列表顯示欄位
     list_filter = ("position",)  # 過濾選項
     search_fields = ("name", "description")  # 搜尋欄位
+
+
+# 新消息管理頁面
+# News admin interface
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date',) # 列表顯示
+    list_filter = ('date',) # 依據日期欄位過濾
+    search_fields = ('title', 'content') # 後台搜尋
