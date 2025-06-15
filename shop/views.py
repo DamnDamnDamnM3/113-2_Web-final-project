@@ -14,6 +14,7 @@ from .models import (
     PurchaseItem,
     PlayerCard,
     ProductVariant,
+    News,
 )
 from django.urls import reverse
 import json
@@ -305,7 +306,10 @@ def product_detail(request, product_id):
 # 首頁視圖 - 顯示網站首頁
 # Home Page View - Display website homepage
 def home(request):
-    return render(request, "main/home.html")
+    latest_news = News.objects.order_by('-date')[:4]  # 最新的4則消息
+    return render(request, "main/home.html", {
+        "latest_news": latest_news
+    })
 
 # 球員卡列表視圖 - 顯示所有球員卡
 # Player Cards List View - Display all player cards
@@ -372,3 +376,8 @@ def update_profile(request):
         return redirect("shop:profile")
 
     return redirect("shop:profile")
+
+# 新消息詳細內容頁面
+def news_detail(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    return render(request, "main/news_detail.html", {"news": news})

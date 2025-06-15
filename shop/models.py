@@ -113,3 +113,14 @@ class PlayerCard(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.position})"
+
+# 新消息模型
+# News model
+class News(models.Model):
+    title = models.CharField(max_length=200) #標題
+    content = models.TextField() #內容
+    date = models.DateField() #日期
+    image = models.ImageField(upload_to='news_images/') #圖片
+    
+    def __str__(self):
+        return f"{self.title} ({self.date})"
