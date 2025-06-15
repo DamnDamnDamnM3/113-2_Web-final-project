@@ -34,12 +34,10 @@ A Django-based e-commerce platform for selling volleyball player cards and relat
 5. **PlayerCard**
    - Volleyball player information
    - Includes player stats, team, position
-   - Card rarity and year information
 
 6. **CartItem**
    - Shopping cart management
    - Supports product variants
-   - Price tracking
 
 7. **PurchaseRecord & PurchaseItem**
    - Order history
@@ -99,6 +97,21 @@ The project follows Django's standard project structure:
 - `static/` - Static files (CSS, JS, images)
 - `media/` - User-uploaded files
 
+## Team
+
+This project is developed by DamnM3 Team:
+- Albert
+- Andy
+- Lacne
+
 ## License
 
-This project is proprietary and confidential.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+The MIT License allows you to:
+- Freely use, modify, and distribute this project
+- Use it for commercial purposes
+- Modify the source code
+- Distribute modified versions
+
+The only condition is that you must retain the original license notice.
