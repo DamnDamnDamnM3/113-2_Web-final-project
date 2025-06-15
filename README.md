@@ -1,6 +1,6 @@
 # Suntory Sunbirds Web Shop
 
-A Django-based e-commerce platform for selling baseball player cards and related merchandise.
+A Django-based e-commerce platform for selling volleyball player cards and related merchandise.
 
 ## Features
 
@@ -32,7 +32,7 @@ A Django-based e-commerce platform for selling baseball player cards and related
    - Support for variant-specific images
 
 5. **PlayerCard**
-   - Baseball player information
+   - Volleyball player information
    - Includes player stats, team, position
    - Card rarity and year information
 
