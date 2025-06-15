@@ -236,8 +236,8 @@ def checkout(request):
             total_price=sum(item.product.price * item.quantity for item in cart_items),
         )
 
-        # 添加購買項目
-        # Add purchase items
+        # 添加購買項目並更新庫存
+        # Add purchase items and update stock
         for item in cart_items:
             PurchaseItem.objects.create(
                 purchase=purchase_record,
@@ -245,6 +245,18 @@ def checkout(request):
                 quantity=item.quantity,
                 price=item.product.price,
             )
+            
+            # 更新商品變體庫存
+            # Update product variant stock
+            if item.variant:
+                variant = item.variant
+                if variant.stock >= item.quantity:
+                    variant.stock -= item.quantity
+                    variant.save()
+                else:
+                    messages.error(request, f"商品 {item.product.name} 的庫存不足")
+                    purchase_record.delete()
+                    return redirect("shop:cart")
 
         # 發送確認郵件
         # Send confirmation email
@@ -260,7 +272,7 @@ def checkout(request):
             總金額：${int(purchase_record.total_price)}
 
             訂購商品：
-            {chr(10).join([f'- {item.product.name} x {item.quantity} (${int(item.price)})' for item in purchase_record.purchaseitem_set.all()])}
+            {chr(10).join([f'            - {item.product.name} x {item.quantity} (${int(item.price)})' for item in purchase_record.purchaseitem_set.all()])}
 
             如有任何問題，請隨時與我們聯繫。
 
